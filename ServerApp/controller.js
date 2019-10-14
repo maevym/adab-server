@@ -11,7 +11,7 @@ exports.home = (req, res) => {
     const cookies = cookie.parse(req.headers.cookie || '');
     const query = "SELECT * FROM users WHERE users.user_token = ?";
 
-    db.get(query, [cookies.session_id], (error, response) => {
+    db.all(query, [cookies.session_id], (error, response) => {
        if (!error) {
            if (response.length > 0) {
                res.sendFile(__dirname + '/public/home.html');
