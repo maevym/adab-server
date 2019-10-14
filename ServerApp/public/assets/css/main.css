@@ -283,9 +283,15 @@ small > a {
 }
 
 .reflex-content {
+    overflow-y: scroll;
     width: 100%;
     background: var(--color-light);
 }
+
+.invisible {
+    display: none;
+}
+
 
 /* sidebar */
 .sidebar-profile {
@@ -303,6 +309,7 @@ small > a {
 }
 
 .announcement-layout {
+    position: static;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -433,6 +440,10 @@ small > a {
     animation-iteration-count: 1;
 }
 
+.sidebar-navigation{
+    overflow-y: hidden;
+}
+
 .navigation-button{
     text-decoration: none;
     display : flex;
@@ -444,6 +455,10 @@ small > a {
     -khtml-user-select: none; 
     -moz-user-select: none; 
     -ms-user-select: none; 
+}
+
+.navigation-button:hover{
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
 }
 
 

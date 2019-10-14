@@ -18,7 +18,8 @@
                 <a href="#" class="force-right padd-10 feather-button">
                     <i class="ic-settings" data-feather="settings"></i>
                 </a>
-                <img href="#" class="img-72 force-center"
+                <img
+                    class="img-72 force-center"
                     src="https://lh3.googleusercontent.com/iqpy39jjdR9tLIUQ3yrPZ3bT4TAK9RhgmaX5i462qQv41xm3UdpSHgoVztg0zEqJ00pqmPFMR9eJ43fWZVwG-w1hCerC8MTPKSM=w1600-rj"
                     alt="profile-pic">
                 <div id="profile-name" class="t-body2" style="padding-top: 10px;">Minatozaki Sana</div>
@@ -27,30 +28,48 @@
 
             <div class="sidebar-line"></div>
             <div class="sidebar-navigation">
-                <a href="#" class="padd-10 feather-button navigation-button disabled">
+                <a
+                    id="nav-dashboard"
+                    onclick="goToNavigation('nav-dashboard')"
+                    class="padd-10 feather-button navigation-button disabled">
                     <i data-feather="home"></i>
                     <span class="navigation-button-text">Dashboard</span>
                 </a>
-                <a href="#" class="padd-10 feather-button navigation-button">
+                <a
+                    id="nav-inbox"
+                    href="#"
+                    onclick="goToNavigation('nav-inbox')"
+                    class="padd-10 feather-button navigation-button">
                     <i data-feather="inbox"></i>
                     <span class="navigation-button-text">Inbox</span>
                 </a>
-                <a href="#" class="padd-10 feather-button navigation-button">
+                <a
+                    id="nav-class"
+                    href="#"
+                    onclick="goToNavigation('nav-class')"
+                    class="padd-10 feather-button navigation-button">
                     <i data-feather="book"></i>
                     <span class="navigation-button-text">Class</span>
                 </a>
-                <a href="#" class="padd-10 feather-button navigation-button">
+                <a
+                    id="nav-discussion"
+                    href="#"
+                    onclick="goToNavigation('nav-discussion')"
+                    class="padd-10 feather-button navigation-button">
                     <i data-feather="message-square"></i>
                     <span class="navigation-button-text">Discussion</span>
                 </a>
-                <a href="#" class="padd-10 feather-button navigation-button">
+                <a 
+                    id="nav-schedule"
+                    href="#"
+                    onclick="goToNavigation('nav-schedule')"
+                    class="padd-10 feather-button navigation-button">
                     <i data-feather="calendar"></i>
                     <span class="navigation-button-text">Schedule</span>
                 </a>
-
             </div>
         </div>
-        <div class="reflex-content">
+        <div id="view-dashboard" class="reflex-content">
             <div class="content-layout">
                 <div class="announcement-layout">
                     <div class="t-body2 announcement-header">Announcement</div>
@@ -205,7 +224,13 @@
                 </div>
             </div>
         </div>
+        <div id="view-inbox" class="reflex-content invisible"><div>Hello</div></div>
+    <div id="view-class" class="reflex-content invisible">Cipret</div>
+    <div id="view-discussion" class="reflex-content invisible">Hasdaisdiasod</div>
+    <div id="view-schedule" class="reflex-content invisible">aaa</div>
     </div>
+    
+    <script src="assets/js/home.js"></script>
     <script>
         feather.replace()
     </script>
