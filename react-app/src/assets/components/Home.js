@@ -2,10 +2,10 @@ import React from 'react';
 import { Button } from './Button';
 import { EmailTextBox, PasswordTextBox } from './TextBox';
 import '../css/Card.css';
-import {Settings} from 'react-feather';
+import { Settings as SettingsIcon} from 'react-feather';
 import logo from '../img/adab.svg';
 
-const mainStyle= {
+const mainStyle = {
     fontFamily: "Roboto",
     display: "flex",
     flexDirection: "row",
@@ -13,9 +13,20 @@ const mainStyle= {
     width: "100%"
 };
 
+const settingButtonStyle = {
+    align: "right",
+    padding: "10px",
+    textAlign: "right",
+}
+
 export class Home extends React.Component {
     constructor(props) {
         super(props);
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick(){
+        console.log("anjir");
     }
     render() {
         return (
@@ -31,7 +42,9 @@ export class Home extends React.Component {
                         align: "center",
                         textAlign: "center"
                     }}>
-                        <Settings/>
+                        <div style={} onClick={this.handleClick}>
+                            <SettingsIcon />
+                        </div>
                         <div style={{
                             height: "72px",
                             width: "72px",
