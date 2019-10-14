@@ -480,7 +480,7 @@ small > a {
 
 @keyframes feather-button-anim {
     0% { transform: rotateZ(0deg);}
-    100% { transform: rotateZ(-180deg);}
+    100% { transform: rotateZ(180deg);}
 }
 
 .disabled {
