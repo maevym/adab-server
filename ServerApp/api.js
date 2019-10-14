@@ -55,13 +55,22 @@ exports.getSessions = (req, res) => {
 };
 
 exports.getProfilePicture = (req, res) => {
-    const query = "SELECT user_picture FROM users WHERE user_token = ?";
+    const query = "SELECT * FROM users WHERE user_token = ?";
     const {session_id: userToken} = cookie.parse(req.headers.cookie || '');
 
     db.get(query, [userToken], (error, row) => {
        if (!error) {
-           res.send(row.user_picture);
-           res.end();
+           if (row != null) {
+               if (row.user_picture != null) {
+                   res.type("image/jpeg");
+                   res.send(new Buffer(row.user_picture, "base64"));
+                   res.end();
+               } else {
+                   response.notFound("No profile picture set", res);
+               }
+           } else {
+               response.unauthorized("Unauthorized. Please login again.", res);
+           }
        } else {
            response.serverError(error, res);
        }
@@ -93,6 +102,7 @@ exports.login = (req, res) => {
                 const session = generateKey();
                 const query2 = "UPDATE users SET user_token = ? WHERE user_id = ?";
 
+                console.log(row[0].user_id);
                 db.run(query2, [session, row[0].user_id], (error2) => {
                     if (!error2) {
                         res.setHeader('Set-Cookie', cookie.serialize('session_id', session, {
@@ -102,6 +112,7 @@ exports.login = (req, res) => {
                         response.ok({"session_id": session}, res);
                     } else {
                         response.serverError(error, res);
+                        // console.log('b');
                     }
                 });
 
@@ -110,6 +121,7 @@ exports.login = (req, res) => {
             }
         } else {
             response.serverError(error, res);
+            // console.log('a');
         }
     });
 };

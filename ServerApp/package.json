@@ -9,6 +9,7 @@
     "feather-icons": "^4.24.1",
     "md5": "^2.2.1",
     "node-record-lpcm16": "^1.0.1",
+    "socket.io": "^2.3.0",
     "sqlite3": "^4.1.0",
     "yargs": "^14.2.0"
   }

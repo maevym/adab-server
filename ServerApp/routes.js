@@ -18,6 +18,10 @@ module.exports = function(app) {
     app.route('/home')
         .get(controller.home);
 
+    app.get('/socket', (req, res) => {
+        res.sendFile(__dirname + '/public/socket.html');
+    });
+
     // API Routes below
     app.route('/api/v1/login')
         .post(todoList.login);
