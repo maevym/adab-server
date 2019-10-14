@@ -403,7 +403,7 @@ small > a {
     text-decoration: none;
     display : flex;
     align-items: center;
-    padding-left: 24px;
+    padding: 16px 24px;
     user-select: disabled;
     -webkit-touch-callout: none;
     -webkit-user-select: none; 
