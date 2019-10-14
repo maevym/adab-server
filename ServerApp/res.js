@@ -35,3 +35,12 @@ exports.serverError = function(message, res) {
     res.status(500).json(data);
     res.end();
 };
+
+exports.notFound = (message, res) => {
+    const data = {
+        'status': 404,
+        'message': message
+    };
+    res.status(404).json(data);
+    res.end();
+};

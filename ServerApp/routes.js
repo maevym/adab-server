@@ -20,9 +20,9 @@ module.exports = function(app) {
     app.route('/api/v1/user/picture')
         .get(todoList.getProfilePicture);
 
-    app.route('/api/v1/user/classes')
-        .get(todoList.getClasses);
+    app.route('/api/v1/user/sessions')
+        .get(todoList.getSessions);
 
     app.route('/api/v1/session/details')
-        .get(todoList.sessionDetails);
+        .post(todoList.sessionDetails);
 };
