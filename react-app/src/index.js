@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import { Login } from './assets/components/Login';
+import { Home } from './assets/components/Home';
 import './assets/css/Util.css';
 
 ReactDOM.render(
@@ -9,7 +9,7 @@ ReactDOM.render(
         <Switch>
             <Route path="/">
                 <div className="gravity-center">
-                    <Login />
+                    <Home />
                 </div>
             </Route>
         </Switch>

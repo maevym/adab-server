@@ -3,8 +3,9 @@
 module.exports = function(app) {
     const todoList = require('./controller');
 
-    app.route('/')
-        .get(todoList.index);
+    app.get('/', (req, res) => {
+        res.sendFile(__dirname + '/public/index.html');
+    });
 
     app.route('/api/v1/login')
         .post(todoList.login);

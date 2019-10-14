@@ -1,15 +1,12 @@
 {
-  "name": "react-app",
+  "name": "test-lottie",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "md5": "latest",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
-    "react-feather": "^2.0.3",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.2.0",
-    "sqlite3": "latest"
+    "react-lottie": "^1.2.3",
+    "react-scripts": "3.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
