@@ -1,0 +1,25 @@
+@media (min-width: 901px) {
+    .card-login {
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #FFFFFF;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+        padding: 24px;
+    }
+}
+
+@media (max-width: 900px) {
+    .card-login {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #FFFFFF;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+        padding: 24px;
+    }
+}
