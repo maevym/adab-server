@@ -359,9 +359,8 @@ small > a {
     animation-iteration-count: 1;
 }
 
-.content-sidebar-layout{
-     display : flex;
-     flex-direction : row;
+.navigation-button{
+     display : block;
      align-items: center;
      padding-left: 24px;
 }
