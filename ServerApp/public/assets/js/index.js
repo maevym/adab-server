@@ -1,4 +1,5 @@
-const url = 'https://adab2.bearcats.dev';
+const url = '/api/v1';
+
 const loginButton = document.querySelector('#btn-login');
 const inputPassword = document.querySelector('#input-password');
 const inputEmail = document.querySelector('#input-email');
