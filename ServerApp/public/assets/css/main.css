@@ -359,6 +359,19 @@ small > a {
     animation-iteration-count: 1;
 }
 
+.content-sidebar-layout{
+     display : flex;
+     flex-direction : row;
+     justify-content: center;
+}
+
+.content-sidebar-text{
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+
 @keyframes feather-button-anim {
     0% { transform: rotateZ(0deg);}
     100% { transform: rotateZ(-180deg);}
