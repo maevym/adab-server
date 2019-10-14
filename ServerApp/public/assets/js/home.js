@@ -37,4 +37,18 @@ function goToNavigation(navigation) {
     allNav.forEach(disableTheRest);
 }
 
+// api calls
+
+axios.get('/api/v1/user/profile', {})
+    .then(function(response){
+        const { user_name: name, user_email: email } = response.values;
+        const profileName = document.querySelector('#profile-name');
+        const profileEmail = document.querySelector('#profile-email');
+        profileName.innerText = name;
+        profileEmail.innerText = email;
+    })
+    .catch(function(error) {
+        console.log(error.message);
+    });
+
 
