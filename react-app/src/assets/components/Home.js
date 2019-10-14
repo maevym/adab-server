@@ -17,6 +17,9 @@ const settingButtonStyle = {
     align: "right",
     padding: "10px",
     textAlign: "right",
+    :hover {
+        cursor: "pointer";
+    }
 }
 
 export class Home extends React.Component {
@@ -42,7 +45,7 @@ export class Home extends React.Component {
                         align: "center",
                         textAlign: "center"
                     }}>
-                        <div style={} onClick={this.handleClick}>
+                        <div style={settingButtonStyle} onClick={this.handleClick}>
                             <SettingsIcon />
                         </div>
                         <div style={{

@@ -1,7 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,400i,500,700&display=swap');
 
+html {
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+    color: #343A40;
+    background: var(--color-light);
+}
+
+/* color */
 :root {
     --color-primary: #007BFF;
+    --color-primary-dark: #0C3CE8;
     --color-info: #30A8E6;
     --color-success: #A1C920;
     --color-warning: #FCBE42;
@@ -12,12 +21,47 @@
     --color-white: #FFFFFF;
 }
 
-html {
-    height: 100%;
-    font-family: 'Roboto', sans-serif;
-    color: #343A40;
+/* typograph */
+.t-display {
+    font-size: 34px;
 }
 
+.t-headline {
+    font-size: 24px;
+}
+
+.t-title {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.t-button {
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.t-subheading {
+    font-size: 16px;
+}
+
+.t-body2 {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.t-body1 {
+    font-size: 14px;
+}
+
+.t-caption {
+    font-size: 12px;
+    color: #6C757D !important;
+}
+
+
+
+/* element */
 body {
     height: 100%;
     margin: 0;
@@ -103,7 +147,7 @@ small > a {
 }
 
 .btn-primary {
-    background: #428DFC;
+    background: var(--color-primary);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
 }
@@ -122,7 +166,7 @@ small > a {
 }
 
 .btn:hover {
-    background-color: #3F80EC;
+    background-color: var(--color-primary-dark);
 }
 
 .text-box-logo {
@@ -132,7 +176,7 @@ small > a {
 .text-box-container {
     width: 100%;
     margin-top: 16px;
-    background-color: white;
+    background-color: var(--color-white);
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -144,7 +188,7 @@ small > a {
     width: 100%;
     font-weight: 400;
     padding: 12px;
-    background: #FFFFFF;
+    background: var(--color-white);
     border: none;
     box-sizing: border-box;
 }
@@ -155,7 +199,35 @@ small > a {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: #FFFFFF;
+    background: var(--color-white);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
     padding: 24px;
 }
+
+
+/* reflex */
+.reflex-layout {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+}
+
+.reflex-sidebar {
+    background: var(--color-white);
+    width: 275px;
+}
+
+.reflex-content {
+    background: var(--color-light);
+}
+
+/* sidebar */
+.sidebar-profile {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    text-align: center;
+}
+
+/* content */
