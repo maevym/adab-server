@@ -1,6 +1,6 @@
 import React from 'react';
-import './css/Button.css';
-import './css/Util.css';
+import '../css/Button.css';
+import '../css/Util.css';
 
 export class Button extends React.Component {
     constructor(props) {
