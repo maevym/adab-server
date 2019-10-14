@@ -10,6 +10,7 @@ html {
 /* color */
 :root {
     --color-primary: #007BFF;
+    --color-primary-hover: #0075E9;
     --color-primary-dark: #0C3CE8;
     --color-info: #30A8E6;
     --color-success: #A1C920;
@@ -185,6 +186,14 @@ small > a {
     margin: 16px;
 }
 
+.mr-8 {
+    margin-right: 8px;
+}
+
+.mt-8 {
+    margin-top: 8px;
+}
+
 .btn-primary {
     background: var(--color-primary);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
@@ -205,7 +214,7 @@ small > a {
 }
 
 .btn:hover {
-    background-color: var(--color-primary-dark);
+    background-color: var(--color-primary-hover);
 }
 
 .text-box-logo {
@@ -306,7 +315,7 @@ small > a {
 }
 
 .content-pane-lg {
-    width: 65%;
+    width: 55%;
     margin-right: 2%;
     display: flex;
     flex-direction: column;
@@ -314,7 +323,7 @@ small > a {
 }
 
 .content-pane-sm {
-    width: 33%;
+    width: 42%;
     display: flex;
     flex-direction: column;
     background-color: var(--color-white);
@@ -322,22 +331,48 @@ small > a {
 
 .card-container {
     width: 100%;
+    padding-bottom: 16px;
     display: flex;
     flex-direction: column;
 }
 
 .card-header {
-    width: 100%;
     height: 48px;
     padding: 0 24px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     border-bottom: 2px solid var(--color-light);
 }
 
 .card-header-title {
     height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: var(--color-secondary);
+}
+
+.card-header-btn {
+    cursor: pointer;
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.card-header-btn:hover {
+    color: var(--color-primary-hover);
+}
+
+.card-inbox-container {
+    background-color: var(--color-white);
+    margin: 8px 16px;
+    padding: 8px 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+}
+
+.inbox-time-container {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -350,6 +385,11 @@ small > a {
 
 .feather-button:hover{
     color: var(--color-dark);
+}
+
+.feather-button-sm {
+    color: var(--color-secondary);
+    width: 16px;
 }
 
 .ic-settings:hover {
