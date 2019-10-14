@@ -4,9 +4,12 @@ const response = require('./res');
 const db = require('./conn');
 const md5 = require('md5');
 const crypto = require('crypto');
+const cookie = require('cookie');
 
 exports.sessionDetails = (req, res) => {
-    const query = "SELECT user_sessions.session_id, courses.course_id, course_name, course_description, session_th, session_mode, classes.class_name, session_room, users.user_id AS lecturer_id, users.user_name AS lecturer_name, session_startdate, session_enddate, content FROM sessions INNER JOIN classes ON sessions.class_id = classes.class_id INNER JOIN courses ON classes.course_id = courses.course_id INNER JOIN users ON classes.class_lecturer_id = users.user_id INNER JOIN user_sessions ON sessions.session_id = user_sessions.session_id WHERE sessions.session_id = ? AND user_sessions.user_id = ?"
+    const query = "SELECT user_sessions.session_id, courses.course_id, course_name, course_description, session_th, session_mode, classes.class_name, session_room, users.user_id AS lecturer_id, users.user_name AS lecturer_name, session_startdate, session_enddate, content FROM sessions INNER JOIN classes ON sessions.class_id = classes.class_id INNER JOIN courses ON classes.course_id = courses.course_id INNER JOIN users ON classes.class_lecturer_id = users.user_id INNER JOIN user_sessions ON sessions.session_id = user_sessions.session_id WHERE sessions.session_id = ? AND user_sessions.user_id = ?";
+
+
 
 };
 
