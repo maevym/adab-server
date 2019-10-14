@@ -290,6 +290,40 @@ small > a {
     margin: 24px 16px;
 }
 
+.announcement-details {
+    color: var(--color-white);
+    margin: 0 16px;
+}
+
+.content-double-pane {
+    display: flex;
+    flex-direction: row;
+    padding: 1.5%;
+    width: 95%;
+    height: 100%;
+}
+
+.content-pane-lg {
+    width: 65%;
+    height: 100%;
+    margin-right: 2%;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-pane-sm {
+    width: 33%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
 .feather-button{
     color: var(--color-secondary);
     transform: rotateZ(0deg);
