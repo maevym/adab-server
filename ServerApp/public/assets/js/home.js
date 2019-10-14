@@ -22,16 +22,14 @@ function disableTheRest(item){
     let buttonList = document.getElementById(item.button).classList;
     let viewList = document.getElementById(item.view).classList;
     console.log(viewList);
-    if(item.button==current){
-        buttonList.add("disabled")
+    if(item.button===current){
+        buttonList.add("disabled");
         viewList.remove("invisible");
         }
     else {
-        buttonList.remove("disabled")
-        viewList.add("invisible")
-    };
-
-
+        buttonList.remove("disabled");
+        viewList.add("invisible");
+    }
 }
 
 function goToNavigation(navigation) {
