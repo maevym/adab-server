@@ -360,15 +360,24 @@ small > a {
 }
 
 .navigation-button{
-     display : block;
-     align-items: center;
-     padding-left: 24px;
+    text-decoration: none;
+    display : flex;
+    align-items: center;
+    padding-left: 24px;
+    user-select: disabled;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none; 
+    -khtml-user-select: none; 
+    -moz-user-select: none; 
+    -ms-user-select: none; 
 }
 
-.content-sidebar-text{
+
+.navigation-button-text{
     font-size: 14px;
     font-weight: 500;
     padding-left: 24px;
+    vertical-align: center;
 }
 
 .sidebar-line{
@@ -377,8 +386,13 @@ small > a {
     background-color: "#F8F9FA";
 }
 
-
 @keyframes feather-button-anim {
     0% { transform: rotateZ(0deg);}
     100% { transform: rotateZ(-180deg);}
+}
+
+.disabled {
+    color: var(--color-primary);
+    pointer-events: none;
+    cursor: default;
 }
