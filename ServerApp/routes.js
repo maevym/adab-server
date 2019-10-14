@@ -13,6 +13,12 @@ module.exports = function(app) {
         res.sendFile(__dirname + '/public/home.html');
     });
 
+    app.route('/login')
+        .get(controller.login);
+
+    app.route('/login')
+        .post(controller.doLogin);
+
     // API Routes below
     app.route('/api/v1/login')
         .post(todoList.login);
