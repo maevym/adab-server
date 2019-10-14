@@ -326,6 +326,19 @@ small > a {
     background-color: #0C3CE8;
 }
 
+.card-header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.card-header-title {
+    display: flex;
+    flex-direction: row;
+
+}
+
 .feather-button{
     color: var(--color-secondary);
     transform: rotateZ(0deg);
@@ -333,12 +346,16 @@ small > a {
 
 .feather-button:hover{
     color: var(--color-dark);
-    animation: feather-button-anim .5s;
+}
+
+.ic-settings:hover {
+    animation-name: feather-button-anim;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
 }
 
 @keyframes feather-button-anim {
-    from { transform: rotateZ(0deg);}
-    to {
-        transform: rotateZ(-90deg);
-    }
+    0% { transform: rotateZ(0deg);}
+    100% { transform: rotateZ(-180deg);}
 }
