@@ -69,6 +69,14 @@ html {
     object-position: top;
 }
 
+.img-32 {
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+}
+
 /* force */
 .force-center{
     align-content: center;
@@ -300,7 +308,7 @@ small > a {
     justify-content: flex-start;
     align-items: center;
     width: 100%;
-    height: 48px;
+    min-height: 48px;
     background-color: var(--color-info);
 }
 
@@ -389,6 +397,19 @@ small > a {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    align-items: center;
+}
+
+.vertical-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.thumbnail {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
 }
 
 .feather-button{
@@ -436,7 +457,6 @@ small > a {
 .sidebar-line{
     width: 100%;
     height:20px;
-    background-color: "#F8F9FA";
 }
 
 @keyframes feather-button-anim {
