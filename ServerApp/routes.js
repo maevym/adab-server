@@ -17,4 +17,7 @@ module.exports = function(app) {
 
     app.route('/api/v1/user/classes')
         .post(todoList.getClasses);
+
+    app.route('/api/v1/session/details')
+        .post(todoList.sessionDetails);
 };
