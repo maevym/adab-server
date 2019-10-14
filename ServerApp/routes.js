@@ -15,13 +15,13 @@ module.exports = function(app) {
         .post(todoList.login);
 
     app.route('/api/v1/user/profile')
-        .post(todoList.profile);
+        .get(todoList.profile);
 
     app.route('/api/v1/user/picture')
-        .post(todoList.getProfilePicture);
+        .get(todoList.getProfilePicture);
 
     app.route('/api/v1/user/classes')
-        .post(todoList.getClasses);
+        .get(todoList.getClasses);
 
     app.route('/api/v1/session/details')
         .post(todoList.sessionDetails);
