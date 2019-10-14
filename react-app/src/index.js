@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import Login from './components/Login';
 import NavBar from './components/NavBar';
 
 ReactDOM.render(
@@ -24,7 +25,7 @@ ReactDOM.render(
             renders the first one that matches the current URL. */}
             <Switch>
                 <Route path="/about">
-                    <h1>About</h1>
+                    <Login />
                 </Route>
                 <Route path="/users">
                     <h1>Users</h1>
