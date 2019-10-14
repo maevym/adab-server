@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(app) {
-    const todoList = require('./controller');
+    const todoList = require('./api');
 
     app.get('/', (req, res) => {
         res.sendFile(__dirname + '/public/index.html');

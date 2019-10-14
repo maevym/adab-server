@@ -7,7 +7,7 @@ const crypto = require('crypto');
 const cookie = require('cookie');
 
 exports.sessionDetails = (req, res) => {
-    const query = "SELECT user_sessions.session_id, courses.course_id, course_name, course_description, session_th, session_mode, classes.class_name, session_room, dosen.user_id AS lecturer_id, dosen.user_name AS lecturer_name, session_startdate, session_enddate, can_talk, content FROM sessions INNER JOIN classes ON sessions.class_id = classes.class_id INNER JOIN courses ON classes.course_id = courses.course_id INNER JOIN users AS dosen ON classes.class_lecturer_id = dosen.user_id INNER JOIN users AS mahasiswa ON user_sessions.user_id = mahasiswa.user_id INNER JOIN user_sessions ON sessions.session_id = user_sessions.session_id INNER JOIN user_groups ON user_groups.group_id = mahasiswa.user_group WHERE sessions.session_id = ? AND mahasiswa.user_token = ?";
+    const query = "SELECT user_sessions.session_id, courses.course_id, course_name, course_description, session_th, session_mode, classes.class_name, session_room, dosen.user_id AS lecturer_id, dosen.user_name AS lecturer_name, session_startdate, session_enddate, can_talk, content FROM sessions INNER JOIN classes ON sessions.class_id = classes.class_id INNER JOIN courses ON classes.course_id = courses.course_id INNER JOIN user_sessions ON sessions.session_id = user_sessions.session_id INNER JOIN users AS dosen ON classes.class_lecturer_id = dosen.user_id INNER JOIN users AS mahasiswa ON user_sessions.user_id = mahasiswa.user_id INNER JOIN user_groups ON user_groups.group_id = mahasiswa.user_group WHERE sessions.session_id = ? AND mahasiswa.user_token = ?";
 
     const cookies = cookie.parse(req.headers.cookie || '');
 
