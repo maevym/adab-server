@@ -334,6 +334,19 @@ small > a {
     animation: feather-button-anim .5s;
 }
 
+.content-sidebar-layout{
+     display : flex;
+     flex-direction : row;
+     justify-content: center;
+}
+
+.content-sidebar-text{
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+
 @keyframes feather-button-anim {
     from { transform: rotateZ(0deg);}
     to {
