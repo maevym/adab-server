@@ -2,7 +2,9 @@
 
 module.exports = function(app) {
     const todoList = require('./api');
+    const controller = require('./controller');
 
+    // HTML routes below
     app.get('/', (req, res) => {
         res.sendFile(__dirname + '/public/index.html');
     });
@@ -11,6 +13,7 @@ module.exports = function(app) {
         res.sendFile(__dirname + '/public/home.html');
     });
 
+    // API Routes below
     app.route('/api/v1/login')
         .post(todoList.login);
 
