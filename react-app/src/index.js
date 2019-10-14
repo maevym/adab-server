@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import { Login } from './components/Login';
-import NavBar from './components/NavBar';
-import './components/css/Util.css';
+import { Login } from './assets/components/Login';
+import './assets/css/Util.css';
 
 ReactDOM.render(
     <Router>

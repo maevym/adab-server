@@ -1,15 +1,19 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
+.text-box-container {
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    border: 2px solid #F8F9FA;
+}
+
 .text-box {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     padding: 8px;
-    margin: 8px;
     background: #FFFFFF;
-    border: 2px solid #F8F9FA;
+    border: none;
     box-sizing: border-box;
-}
-
-.text-box:focus {
-    border: 2px solid #428DFC;
 }
