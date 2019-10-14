@@ -24,5 +24,5 @@ module.exports = function(app) {
         .get(todoList.getClasses);
 
     app.route('/api/v1/session/details')
-        .post(todoList.sessionDetails);
+        .get(todoList.sessionDetails);
 };

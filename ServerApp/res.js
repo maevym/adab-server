@@ -9,7 +9,7 @@ exports.ok = function(values, res) {
     res.end();
 };
 
-exports.unauthorized = function(message, res) {
+exports.unauthorized = function(values, res) {
     const data = {
         'status': 401,
         'values': values
@@ -18,7 +18,7 @@ exports.unauthorized = function(message, res) {
     res.end();
 };
 
-exports.forbidden = function(message, res) {
+exports.forbidden = function(values, res) {
     const data = {
         'status': 403,
         'values': values
@@ -27,7 +27,7 @@ exports.forbidden = function(message, res) {
     res.end();
 };
 
-exports.serverError = function(message, res) {
+exports.serverError = function(values, res) {
     const data = {
         'status': 500,
         'values': values

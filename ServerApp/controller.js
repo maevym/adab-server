@@ -7,27 +7,43 @@ const crypto = require('crypto');
 const cookie = require('cookie');
 
 exports.sessionDetails = (req, res) => {
-    const query = "SELECT user_sessions.session_id, courses.course_id, course_name, course_description, session_th, session_mode, classes.class_name, session_room, users.user_id AS lecturer_id, users.user_name AS lecturer_name, session_startdate, session_enddate, content FROM sessions INNER JOIN classes ON sessions.class_id = classes.class_id INNER JOIN courses ON classes.course_id = courses.course_id INNER JOIN users ON classes.class_lecturer_id = users.user_id INNER JOIN user_sessions ON sessions.session_id = user_sessions.session_id WHERE sessions.session_id = ? AND user_sessions.user_id = ?";
+    const query = "SELECT user_sessions.session_id, courses.course_id, course_name, course_description, session_th, session_mode, classes.class_name, session_room, dosen.user_id AS lecturer_id, dosen.user_name AS lecturer_name, session_startdate, session_enddate, can_talk, content FROM sessions INNER JOIN classes ON sessions.class_id = classes.class_id INNER JOIN courses ON classes.course_id = courses.course_id INNER JOIN users AS dosen ON classes.class_lecturer_id = dosen.user_id INNER JOIN users AS mahasiswa ON user_sessions.user_id = mahasiswa.user_id INNER JOIN user_sessions ON sessions.session_id = user_sessions.session_id INNER JOIN user_groups ON user_groups.group_id = mahasiswa.user_group WHERE sessions.session_id = 3 AND user_sessions.user_id = (SELECT user_id FROM users WHERE session_id = ?)";
 
-    const {session_id: userToken} = cookie.parse(req.headers.cookie || '');
-    const {session_id: sessionId} = req.body;
+    const cookies = cookie.parse(req.headers.cookie || '');
 
-
+    if (cookies == null || cookies.userToken == null) {
+        response.unauthorized("Unauthorized", res);
+    } else {
+        const {session_id: userToken} = cookies;
+        const {session_id: sessionId} = req.body;
+        db.get(query, [userToken], (error, row) => {
+            if (!error) {
+                response.ok(row, res);
+            } else {
+                response.serverError(error, res);
+            }
+        });
+    }
 
 };
 
 exports.getClasses = (req, res) => {
     const query = "SELECT sessions.session_id, courses.course_id, course_name, session_th, session_mode, classes.class_name, session_room, users.user_id AS lecturer_id, users.user_name AS lecturer_name, session_startdate, session_enddate FROM user_sessions INNER JOIN sessions ON user_sessions.session_id = sessions.session_id INNER JOIN classes ON sessions.class_id = classes.class_id INNER JOIN courses ON classes.course_id = courses.course_id INNER JOIN users ON classes.class_lecturer_id = users.user_id  WHERE user_sessions.user_id = (SELECT user_id FROM users WHERE user_token = ?)";
 
-    const {session_id: userToken} = cookie.parse(req.headers.cookie || '');
+    const cookies = cookie.parse(req.headers.cookie || '');
 
-    db.all(query, [userToken], (error, row) => {
-        if (!error) {
-            response.ok(row, res);
-        } else {
-            response.serverError(error, res);
-        }
-    });
+    if (cookies == null || cookies.userToken == null) {
+        response.unauthorized("Unauthorized", res);
+    } else {
+        const {session_id: userToken} = cookies;
+        db.all(query, [userToken], (error, row) => {
+            if (!error) {
+                response.ok(row, res);
+            } else {
+                response.serverError(error, res);
+            }
+        });
+    }
 };
 
 exports.getProfilePicture = (req, res) => {
