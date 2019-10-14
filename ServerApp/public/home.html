@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,25 +9,47 @@
     <link rel="stylesheet" href="./assets/css/main.css">
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 </head>
+
 <body>
     <div class="reflex-layout">
         <div class="reflex-sidebar">
             <div class="sidebar-profile">
-                <a href="#" class="force-right padd-10">
+                <a href="#" class="force-right padd-10 feather-button">
                     <i data-feather="settings"></i>
                 </a>
-                <img
-                    href="#"
-                    class="img-72 force-center"
+                <img href="#" class="img-72 force-center"
                     src="https://lh3.googleusercontent.com/iqpy39jjdR9tLIUQ3yrPZ3bT4TAK9RhgmaX5i462qQv41xm3UdpSHgoVztg0zEqJ00pqmPFMR9eJ43fWZVwG-w1hCerC8MTPKSM=w1600-rj"
-                    alt="profile-pic"
-                    >
-                <div
-                    class="t-body2"
-                    style="padding-top: 10px;">Minatozaki Sana</div>
-                <div
-                    class="t-body1"
-                    style="padding-top: 4px">sanachan@binus.ac.id</div>
+                    alt="profile-pic">
+                <div id="profile-name" class="t-body2" style="padding-top: 10px;">Minatozaki Sana</div>
+                <div id="profile-email" class="t-body1" style="padding-top: 4px">sanachan@binus.ac.id</div>
+            </div>
+            <div class="sidebar-navigation">
+                <div>
+                    <a href="#" class="padd-10 feather-button">
+                        <i data-feather="home"></i>
+                    </a>
+                </div>
+                <div>
+                    <a href="#" class="padd-10 feather-button">
+                        <i data-feather="inbox"></i>
+                    </a>
+                </div>
+                <div>
+                    <a href="#" class="padd-10 feather-button">
+                        <i data-feather="book"></i>
+                    </a>
+                </div>
+                <div>
+                    <a href="#" class="padd-10 feather-button">
+                        <i data-feather="message-square"></i>
+                    </a>
+                </div>
+                <div>
+                    <a href="#" class="padd-10 feather-button">
+                        <i data-feather="calendar"></i>
+                    </a>
+                </div>
+
             </div>
         </div>
         <div class="reflex-content">
@@ -39,7 +62,8 @@
         </div>
     </div>
     <script>
-          feather.replace()
+        feather.replace()
     </script>
 </body>
+
 </html>

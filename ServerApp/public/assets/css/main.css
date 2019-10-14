@@ -98,6 +98,8 @@ html {
 .padd-10{
     padding: 10px;
 }
+
+
 /* element */
 body {
     height: 100%;
@@ -252,7 +254,7 @@ small > a {
 
 .reflex-sidebar {
     background: var(--color-white);
-    width: 275px;
+    min-width: 300px;
 }
 
 .reflex-content {
@@ -286,4 +288,21 @@ small > a {
 .announcement-header {
     color: var(--color-white);
     margin: 24px 16px;
+}
+
+.feather-button{
+    color: var(--color-secondary); 
+    transform: rotateZ(0deg); 
+}
+
+.feather-button:hover{
+    color: var(--color-dark);
+    animation: feather-button-anim .5s;
+}
+
+@keyframes feather-button-anim {
+    from { transform: rotateZ(0deg);}
+    to {
+        transform: rotateZ(-90deg);
+    }
 }
