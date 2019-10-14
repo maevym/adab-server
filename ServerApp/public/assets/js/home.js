@@ -41,7 +41,7 @@ function goToNavigation(navigation) {
 
 axios.get('/api/v1/user/profile', {})
     .then(function(response){
-        const { user_name: name, user_email: email } = response.values;
+        const { user_name: name, user_email: email } = response.data.values;
         const profileName = document.querySelector('#profile-name');
         const profileEmail = document.querySelector('#profile-email');
         profileName.innerText = name;
