@@ -8,7 +8,7 @@ const cookie = require('cookie');
 const axios = require('axios');
 
 exports.login = (req, res) => {
-    res.sendFile(__dirname + '/public/index.html');
+    res.sendFile(__dirname + '/public/login.html');
 };
 
 exports.doLogin = (req, res) => {
