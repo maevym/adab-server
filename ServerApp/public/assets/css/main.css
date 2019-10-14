@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+}
+
+h6 {
+    color: #343A40;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    align-self: flex-start;
+}
+
+small {
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    color: #6C757D;
+}
+
+small > a {
+    cursor: pointer;
+    color: #428DFC;
+    text-decoration: none;
+}
+
+.logo {
+    width: 100px;
+}
+
+.match-parent {
+    width: 100%;
+}
+
+.gravity-center {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.lg-margin-top {
+     margin-top: 32px;
+ }
+
+.sm-margin-top {
+    margin-top: 16px;
+}
+
+.lg-margin-bottom {
+    margin-bottom: 32px;
+}
+
+.sm-margin-bottom {
+    margin-bottom: 16px;
+}
+
+.lg-margin-left {
+    margin-left: 32px;
+}
+
+.sm-margin-left {
+    margin-left: 16px;
+}
+
+.lg-margin-right {
+    margin-right: 32px;
+}
+
+.sm-margin-right {
+    margin-right: 16px;
+}
+
+.lg-margin {
+    margin: 32px;
+}
+
+.sm-margin {
+    margin: 16px;
+}
+
+.btn-primary {
+    background: #428DFC;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+}
+
+.btn {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 8px;
+    margin: 8px;
+    line-height: 16px;
+    text-align: center;
+    border: none;
+    color: #FFFFFF;
+}
+
+.btn:hover {
+    background-color: #3F80EC;
+}
+
+.text-box-logo {
+    margin-left: 8px;
+}
+
+.text-box-container {
+    width: 100%;
+    margin-top: 16px;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    border: 2px solid #F8F9FA;
+}
+
+.text-box {
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    padding: 12px;
+    background: #FFFFFF;
+    border: none;
+    box-sizing: border-box;
+}
+
+.card-login {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+    padding: 24px;
+}
