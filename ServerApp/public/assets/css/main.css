@@ -36,9 +36,30 @@ html {
 }
 
 .t-button {
-    font-size: ;
+    font-size: 14px;
+    font-weight: 500;
     text-transform: uppercase;
 }
+
+.t-subheading {
+    font-size: 16px;
+}
+
+.t-body2 {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.t-body1 {
+    font-size: 14px;
+}
+
+.t-caption {
+    font-size: 12px;
+    color: #6C757D !important;
+}
+
+
 
 /* element */
 body {
