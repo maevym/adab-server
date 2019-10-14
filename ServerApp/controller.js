@@ -27,8 +27,13 @@ exports.doLogin = (req, res) => {
             res.redirect('/home');
         })
         .catch(function(e) {
+            if (e.status === 401) {
+                res.redirect("/login?error=Invalid username or password");
+            } else {
+                res.redirect("/login?error=" + e.message);
+            }
+
             console.log(e);
-            res.redirect("/login?error=" + e.message);
         });
 
 };
