@@ -6,6 +6,10 @@ module.exports = function(app) {
     app.get('/', (req, res) => {
         res.sendFile(__dirname + '/public/index.html');
     });
+    
+    app.get('/home', (req, res) => {
+        res.sendFile(__dirname + '/public/home.html');
+    });
 
     app.route('/api/v1/login')
         .post(todoList.login);
