@@ -8,16 +8,15 @@ module.exports = function(app) {
     app.get('/', (req, res) => {
         res.sendFile(__dirname + '/public/index.html');
     });
-    
-    app.get('/home', (req, res) => {
-        res.sendFile(__dirname + '/public/home.html');
-    });
 
     app.route('/login')
         .get(controller.login);
 
     app.route('/login')
         .post(controller.doLogin);
+
+    app.route('/home')
+        .get(controller.home);
 
     // API Routes below
     app.route('/api/v1/login')

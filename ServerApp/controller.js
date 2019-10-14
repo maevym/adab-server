@@ -7,6 +7,23 @@ const crypto = require('crypto');
 const cookie = require('cookie');
 const axios = require('axios');
 
+exports.home = (req, res) => {
+    const cookies = cookie.parse(req.headers.cookie || '');
+    const query = "SELECT * FROM users WHERE users.user_token = ?";
+
+    db.get(query, [cookies.session_id], (error, response) => {
+       if (!error) {
+           if (response.length > 0) {
+               res.sendFile(__dirname + '/public/home.html');
+           } else {
+               res.status(403).redirect("/login?error=Unauthorized");
+           }
+       }  else {
+           res.status(500).redirect("/login?error=" + error.message);
+       }
+    });
+};
+
 exports.login = (req, res) => {
     res.sendFile(__dirname + '/public/login.html');
 };
@@ -27,7 +44,7 @@ exports.doLogin = (req, res) => {
             res.redirect('/home');
         })
         .catch(function(e) {
-            if (e.status === 401) {
+            if (e.response.status === 401) {
                 res.redirect("/login?error=Invalid username or password");
             } else {
                 res.redirect("/login?error=" + e.message);
