@@ -7,6 +7,10 @@ html {
     background: var(--color-light);
 }
 
+form {
+    width: 100%;
+}
+
 /* color */
 :root {
     --color-primary: #007BFF;
