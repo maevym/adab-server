@@ -16,6 +16,9 @@ module.exports = function(app) {
     app.route('/login')
         .get(controller.login);
 
+    app.route('/login')
+        .post(controller.doLogin);
+
     // API Routes below
     app.route('/api/v1/login')
         .post(todoList.login);

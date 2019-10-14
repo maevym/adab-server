@@ -12,6 +12,23 @@ exports.login = (req, res) => {
 };
 
 exports.doLogin = (req, res) => {
-    const {username, password} = req.body;
+    const {email, password} = req.body;
+    const host = req.protocol + '://' + req.get('host');
+
+    axios.post(host + '/api/v1/login', {
+        user_email: email,
+        user_password: password
+    })
+        .then(function(response) {
+            res.setHeader('Set-Cookie', cookie.serialize('session_id', response.data.values.session_id, {
+                httpOnly: true,
+                maxAge: 60 * 60 * 24 * 0.5 // 1 week
+            }));
+            res.redirect('/home');
+        })
+        .catch(function(e) {
+            console.log(e);
+            res.redirect("/login?error=" + e.message);
+        });
 
 };
