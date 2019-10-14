@@ -59,6 +59,45 @@ html {
     color: #6C757D !important;
 }
 
+/* image */
+.img-72 {
+    height: 72px;
+    width: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+}
+
+/* force */
+.force-center{
+    align-content: center;
+    align-items: center;
+    align-self: center;
+    text-align: center;
+}
+
+.force-left{
+    align-content: flex-start;
+    align-items: flex-start;
+    align-self: flex-start;
+    text-align: start;
+}
+
+.force-right{
+    align-content: flex-end;
+    align-items: flex-end;
+    align-self: flex-end;
+    text-align: end;
+}
+
+/* padding */
+.padd-4{
+    padding: 4px;
+}
+
+.padd-10{
+    padding: 10px;
+}
 
 
 /* element */
@@ -107,8 +146,8 @@ small > a {
 }
 
 .lg-margin-top {
-     margin-top: 32px;
- }
+    margin-top: 32px;
+}
 
 .sm-margin-top {
     margin-top: 16px;
@@ -215,7 +254,7 @@ small > a {
 
 .reflex-sidebar {
     background: var(--color-white);
-    width: 275px;
+    min-width: 300px;
 }
 
 .reflex-content {
@@ -249,4 +288,21 @@ small > a {
 .announcement-header {
     color: var(--color-white);
     margin: 24px 16px;
+}
+
+.feather-button{
+    color: var(--color-secondary);
+    transform: rotateZ(0deg);
+}
+
+.feather-button:hover{
+    color: var(--color-dark);
+    animation: feather-button-anim .5s;
+}
+
+@keyframes feather-button-anim {
+    from { transform: rotateZ(0deg);}
+    to {
+        transform: rotateZ(-90deg);
+    }
 }
