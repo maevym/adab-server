@@ -11,4 +11,10 @@ module.exports = function(app) {
 
     app.route('/api/v1/user/profile')
         .post(todoList.profile);
+
+    app.route('/api/v1/user/picture')
+        .post(todoList.getProfilePicture);
+
+    app.route('/api/v1/user/classes')
+        .post(todoList.getClasses);
 };
