@@ -1,40 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import Login from './components/Login';
+import { Login } from './components/Login';
 import NavBar from './components/NavBar';
+import './components/css/Util.css';
 
 ReactDOM.render(
     <Router>
-        <div>
-            <nav>
-                <ul>
-                    <li>
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li>
-                        <Link to="/about">About</Link>
-                    </li>
-                    <li>
-                        <Link to="/users">Users</Link>
-                    </li>
-                </ul>
-            </nav>
-
-            {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-            <Switch>
-                <Route path="/about">
+        <Switch>
+            <Route path="/">
+                <div className="gravity-center">
                     <Login />
-                </Route>
-                <Route path="/users">
-                    <h1>Users</h1>
-                </Route>
-                <Route path="/">
-                    <h1>Home</h1>
-                </Route>
-            </Switch>
-        </div>
+                </div>
+            </Route>
+        </Switch>
     </Router>,
     document.getElementById('root')
 );

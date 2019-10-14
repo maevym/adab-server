@@ -1,13 +1,12 @@
 import React from 'react';
-import './css/Button.css'
+import './css/Button.css';
+import './css/Util.css';
 
-class Button extends React.Component {
+export class Button extends React.Component {
     constructor(props) {
         super(props);
     }
     render() {
-        return <button style={{width: 100}} className="btn-primary btn" onClick={this.props.onclick}>{ this.props.label }</button>
+        return <button className={this.props.classname + " btn-primary btn-inline btn lg-margin-top"} onClick={this.props.onclick}>{ this.props.label }</button>
     }
 }
-
-export default Button;

@@ -1,7 +1,9 @@
 import React from 'react';
-import Button from './Button';
+import { Button } from './Button';
+import { TextBox } from './TextBox';
+import './css/Card.css';
 
-class Login extends React.Component {
+export class Login extends React.Component {
     constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
@@ -11,9 +13,14 @@ class Login extends React.Component {
     }
     render() {
         return (
-            <Button label="Login" onclick={this.handleClick}/>
+            <div className="card-login">
+                <img className="logo sm-margin-bottom sm-margin-top" src="../adab.svg" alt="adab logo" />
+                <h6>SIGN IN</h6>
+                <TextBox classname="match-parent" placeholder="Username" />
+                <TextBox classname="match-parent" placeholder="Password" />
+                <Button classname="match-parent" label="LOG IN" onclick={this.handleClick} />
+                <small>Problem with login? <a>Click Here</a></small>
+            </div>
         );
     }
 }
-
-export default Login;
