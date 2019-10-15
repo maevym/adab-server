@@ -63,7 +63,7 @@ exports.getProfilePicture = (req, res) => {
            if (row != null) {
                if (row.user_picture != null) {
                    res.type("image/jpeg");
-                   res.send(new Buffer(row.user_picture, "base64"));
+                   res.send(Buffer.from(row.user_picture, "base64"));
                    res.end();
                } else {
                    response.notFound("No profile picture set", res);
