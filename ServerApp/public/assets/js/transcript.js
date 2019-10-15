@@ -1,5 +1,5 @@
 const transcript = document.getElementById("transcript");
-const startBicara = document.getElementById("transcript");
+const startBicara = document.getElementById("start-talking");
 let nenglanghunjukbanghu = true;
 let recognition;
 
@@ -11,7 +11,7 @@ function recognize() {
         recognition.interimResults = false;
         recognition.onresult = function (event) {
             console.log('You said: ', event.results[0][0].transcript);
-            transcript.innerHTML += (event.results[0][0].transcript);
+            transcript.innerHTML += " " + (event.results[0][0].transcript);
         };
         recognition.onerror = function (evt) {
             console.log(evt);
@@ -24,5 +24,7 @@ function recognize() {
     } else {
         startBicara.innerText = 'Start Talking';
         recognition.stop();
+        recognition = null;
     }
+    nenglanghunjukbanghu = !nenglanghunjukbanghu;
 }
