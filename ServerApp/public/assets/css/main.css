@@ -428,6 +428,14 @@ small > a {
     background-color: var(--color-light);
 }
 
+.no-hover {
+    cursor: inherit;
+}
+
+.no-hover:hover {
+    background-color: var(--color-white) !important;
+}
+
 .left-right-container {
     display: flex;
     flex-direction: row;
