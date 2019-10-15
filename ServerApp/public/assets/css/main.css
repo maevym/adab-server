@@ -284,21 +284,10 @@ small > a {
 .reflex-sidebar {
     background: var(--color-white);
     min-width: 300px;
-    overflow: hidden;
-}
-
-.reflex-resize {
-    min-width: 2px;
-    cursor: ew-resize;
-}
-
-.reflex-resize:hover {
-    background: var(--color-primary-hover);
 }
 
 .reflex-content {
     overflow-y: scroll;
-    overflow-x: hidden;
     width: 100%;
     background: var(--color-light);
 }
@@ -324,7 +313,9 @@ small > a {
 }
 
 .announcement-layout {
-    position: static;
+    position: sticky;
+    top: 0;
+    z-index: 2;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -344,24 +335,47 @@ small > a {
     margin: 0 16px;
 }
 
-.content-double-pane {
-    display: flex;
-    flex-direction: row;
-    padding: 16px;
-    width: 95%;
+@media (min-width: 901px) {
+    .content-double-pane {
+        display: flex;
+        flex-direction: row;
+        padding: 16px;
+        width: 95%;
+    }
+
+    .content-pane-lg {
+        width: 55%;
+        margin-right: 2%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .content-pane-sm {
+        width: 42%;
+        display: flex;
+        flex-direction: column;
+    }
 }
 
-.content-pane-lg {
-    width: 55%;
-    margin-right: 2%;
-    display: flex;
-    flex-direction: column;
-}
+@media (max-width: 900px) {
+    .content-double-pane {
+        display: flex;
+        flex-direction: column;
+        padding: 16px;
+        width: 95%;
+    }
 
-.content-pane-sm {
-    width: 42%;
-    display: flex;
-    flex-direction: column;
+    .content-pane-lg {
+        width: 95%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .content-pane-sm {
+        width: 95%;
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 .card-container {
@@ -408,12 +422,6 @@ small > a {
     padding: 16px 16px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
-    cursor: pointer;
-    user-select: none;
-}
-
-.card-content-container:hover {
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
 }
 
 .card-content-container:hover {
@@ -474,19 +482,16 @@ small > a {
     text-decoration: none;
     display : flex;
     align-items: center;
-    padding: 10px 8px;
+    padding: 16px 24px;
     user-select: disabled;
     -webkit-touch-callout: none;
     -webkit-user-select: none; 
     -khtml-user-select: none; 
     -moz-user-select: none; 
     -ms-user-select: none; 
-    margin: 12px;
 }
 
 .navigation-button:hover{
-    background: var(--color-light);
-    border-radius: 5px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
 }
 
