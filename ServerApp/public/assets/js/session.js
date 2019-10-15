@@ -3,6 +3,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const title = document.querySelector('#title');
 const subtitle = document.querySelector('#subtitle');
 const startTalk = document.querySelector('#start-talking');
+const jengjengjengjeng = document.querySelector('#transcript');
 
 axios.get('/api/v1/user/profile', {})
     .then(function(response){
@@ -24,6 +25,7 @@ axios.post('/api/v1/session/details', {
         title.innerText = `${courseName}: ${topicTitle}`;
         subtitle.innerText = `${courseId} - ${lecturerName}`;
         startTalk.hidden = canTalk !== 1;
+        jengjengjengjeng.innerText = content.slice(1);
     })
     .catch(function(error) {
         window.location = '/home';
