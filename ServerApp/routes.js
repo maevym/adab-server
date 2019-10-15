@@ -18,6 +18,9 @@ module.exports = function(app) {
     app.route('/home')
         .get(controller.home);
 
+    app.route('/session')
+        .get(controller.session);
+
     app.get('/socket', (req, res) => {
         res.sendFile(__dirname + '/public/socket.html');
     });

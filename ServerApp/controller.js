@@ -28,6 +28,10 @@ exports.login = (req, res) => {
     res.sendFile(__dirname + '/public/login.html');
 };
 
+exports.session = (req, res) => {
+    res.sendFile(__dirname + '/public/session.html');
+};
+
 exports.doLogin = (req, res) => {
     const {email, password} = req.body;
     const host = req.protocol + '://' + req.get('host');

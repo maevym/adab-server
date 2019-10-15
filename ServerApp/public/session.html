@@ -19,9 +19,9 @@
                     <i class="ic-settings" data-feather="settings"></i>
                 </a>
                 <img
-                    class="img-72 force-center"
-                    src="/api/v1/user/picture"
-                    alt="profile-pic">
+                        class="img-72 force-center"
+                        src="/api/v1/user/picture"
+                        alt="profile-pic">
                 <div id="profile-name" class="t-body2" style="padding-top: 10px;">Minatozaki Sana</div>
                 <div id="profile-email" class="t-body1" style="padding-top: 4px">sanachan@binus.ac.id</div>
             </div>
@@ -29,41 +29,41 @@
             <div class="sidebar-line"></div>
             <div class="sidebar-navigation">
                 <a
-                    id="nav-dashboard"
-                    onclick="goToNavigation('nav-dashboard')"
-                    class="padd-10 feather-button navigation-button disabled">
+                        id="nav-dashboard"
+                        onclick="goToNavigation('nav-dashboard')"
+                        class="padd-10 feather-button navigation-button disabled">
                     <i data-feather="home"></i>
                     <span class="navigation-button-text">Dashboard</span>
                 </a>
                 <a
-                    id="nav-inbox"
-                    href="#"
-                    onclick="goToNavigation('nav-inbox')"
-                    class="padd-10 feather-button navigation-button">
+                        id="nav-inbox"
+                        href="#"
+                        onclick="goToNavigation('nav-inbox')"
+                        class="padd-10 feather-button navigation-button">
                     <i data-feather="inbox"></i>
                     <span class="navigation-button-text">Inbox</span>
                 </a>
                 <a
-                    id="nav-class"
-                    href="#"
-                    onclick="goToNavigation('nav-class')"
-                    class="padd-10 feather-button navigation-button">
+                        id="nav-class"
+                        href="#"
+                        onclick="goToNavigation('nav-class')"
+                        class="padd-10 feather-button navigation-button">
                     <i data-feather="book"></i>
                     <span class="navigation-button-text">Class</span>
                 </a>
                 <a
-                    id="nav-discussion"
-                    href="#"
-                    onclick="goToNavigation('nav-discussion')"
-                    class="padd-10 feather-button navigation-button">
+                        id="nav-discussion"
+                        href="#"
+                        onclick="goToNavigation('nav-discussion')"
+                        class="padd-10 feather-button navigation-button">
                     <i data-feather="message-square"></i>
                     <span class="navigation-button-text">Discussion</span>
                 </a>
-                <a 
-                    id="nav-schedule"
-                    href="#"
-                    onclick="goToNavigation('nav-schedule')"
-                    class="padd-10 feather-button navigation-button">
+                <a
+                        id="nav-schedule"
+                        href="#"
+                        onclick="goToNavigation('nav-schedule')"
+                        class="padd-10 feather-button navigation-button">
                     <i data-feather="calendar"></i>
                     <span class="navigation-button-text">Schedule</span>
                 </a>
@@ -81,36 +81,16 @@
                         <section class="card-container">
                             <div class="card-header">
                                 <div class="card-header-title">
-                                    <i class="mr-8 feather-button" data-feather="inbox"></i>
-                                    <div>Inbox</div>
+                                    <i class="mr-8 feather-button" data-feather="book-open"></i>
+                                    <div class="vertical-container">
+                                        <div id="title"></div>
+                                        <div id="subtitle" class="t-caption"></div>
+                                    </div>
                                 </div>
-                                <a href="#" class="card-header-btn t-body2">More</a>
+                                <button id="start-talking" type="button" class="btn btn-primary" hidden onclick="recognize()">Start Talking</button>
                             </div>
                             <div class="card-content-container">
-                                <div class="t-caption">Announcement</div>
-                                <div class="t-body2">PENGUMUMAN AUTO DEBET BIAYA KULIAH SEMESTER GENAP 2018/2019</div>
-                                <div class="mt-8 left-right-container">
-                                    <i class="mr-8 feather-button-sm" data-feather="clock"></i>
-                                    <div class="t-caption">September 27, 2019</div>
-                                </div>
-                            </div>
-                            <div class="card-content-container">
-                                <div class="t-caption">Announcement</div>
-                                <div class="t-body2">PENGUMUMAN UNTUK MAHASISWA YANG MENGAMBIL SKRIPSI DI SEMESTER GANJIL 2018/2019</div>
-                                <div class="mt-8 left-right-container">
-                                    <i class="mr-8 feather-button-sm" data-feather="clock"></i>
-                                    <div class="t-caption">September 27, 2019</div>
-                                </div>
-                            </div>
-                        </section>
-
-                        <section id="recycler-view" class="card-container">
-                            <div class="card-header">
-                                <div class="card-header-title">
-                                    <i class="mr-8 feather-button" data-feather="book"></i>
-                                    <div>Session</div>
-                                </div>
-                                <a href="#" class="card-header-btn t-body2">More</a>
+                                <p id="transcript"></p>
                             </div>
                         </section>
                     </div>
@@ -195,13 +175,13 @@
             </div>
         </div>
         <div id="view-inbox" class="reflex-content invisible"><div>Hello</div></div>
-    <div id="view-class" class="reflex-content invisible">Cipret</div>
-    <div id="view-discussion" class="reflex-content invisible">Hasdaisdiasod</div>
-    <div id="view-schedule" class="reflex-content invisible">aaa</div>
+        <div id="view-class" class="reflex-content invisible">Cipret</div>
+        <div id="view-discussion" class="reflex-content invisible">Hasdaisdiasod</div>
+        <div id="view-schedule" class="reflex-content invisible">aaa</div>
     </div>
 
     <script src="./assets/js_modules/axios.js"></script>
-    <script src="./assets/js/home.js"></script>
+    <script src="./assets/js/session.js"></script>
     <script>
         feather.replace()
     </script>
