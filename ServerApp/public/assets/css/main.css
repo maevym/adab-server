@@ -284,10 +284,21 @@ small > a {
 .reflex-sidebar {
     background: var(--color-white);
     min-width: 300px;
+    overflow: hidden;
+}
+
+.reflex-resize {
+    min-width: 2px;
+    cursor: ew-resize;
+}
+
+.reflex-resize:hover {
+    background: var(--color-primary-hover);
 }
 
 .reflex-content {
     overflow-y: scroll;
+    overflow-x: hidden;
     width: 100%;
     background: var(--color-light);
 }
@@ -397,6 +408,12 @@ small > a {
     padding: 16px 16px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.card-content-container:hover {
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
 }
 
 .card-content-container:hover {
@@ -457,16 +474,19 @@ small > a {
     text-decoration: none;
     display : flex;
     align-items: center;
-    padding: 16px 24px;
+    padding: 10px 8px;
     user-select: disabled;
     -webkit-touch-callout: none;
     -webkit-user-select: none; 
     -khtml-user-select: none; 
     -moz-user-select: none; 
     -ms-user-select: none; 
+    margin: 12px;
 }
 
 .navigation-button:hover{
+    background: var(--color-light);
+    border-radius: 5px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
 }
 
