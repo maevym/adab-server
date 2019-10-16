@@ -6,8 +6,36 @@ const md5 = require('md5');
 const crypto = require('crypto');
 const cookie = require('cookie');
 
+exports.newDiscussion = (req, res) => {
+    const cookies = cookie.parse(req.headers.cookie || '');
+    const {session_id: sessionId, reply_to: replyTo, content} = req.body;
+    const {session_id: userToken} = cookies;
+
+    if (cookies == null || cookies.session_id == null) {
+        response.unauthorized("Unauthorized", res);
+        return;
+    }
+
+    const queryUserId = `SELECT user_id FROM users WHERE user_token = ?`;
+    const queryInsert = `INSERT INTO discussions (session_id, author_id, reply_to, content, timestamp) SELECT ?, ?, ?, ?, datetime() WHERE EXISTS (SELECT * FROM user_sessions WHERE user_id = ? AND session_id = ?)`;
+
+    db.get(queryUserId, [userToken], (error, data) => {
+       if (!error) {
+           db.run(queryInsert, [sessionId, data.user_id, replyTo, content, data.user_id, sessionId], (error2) => {
+               if (!error2) {
+                   response.ok("New discussion entry posted.", res);
+               } else {
+                   response.serverError(error, res);
+               }
+           });
+       } else {
+           response.serverError(error, res);
+       }
+    });
+};
+
 exports.discussions = (req, res) => {
-    const query = `SELECT author_id, author.user_name AS author_name, content, reply_to, timestamp FROM discussions INNER JOIN user_sessions ON user_sessions.session_id = discussions.session_id INNER JOIN users AS author ON discussions.author_id = author.user_id INNER JOIN users AS mhs ON user_sessions.user_id = mhs.user_id WHERE discussions.session_id = ? AND mhs.user_token = ?`;
+    const query = `SELECT discussion_id, author_id, author.user_name AS author_name, content, reply_to, timestamp FROM discussions INNER JOIN user_sessions ON user_sessions.session_id = discussions.session_id INNER JOIN users AS author ON discussions.author_id = author.user_id INNER JOIN users AS mhs ON user_sessions.user_id = mhs.user_id WHERE discussions.session_id = ? AND mhs.user_token = ?`;
 
     const cookies = cookie.parse(req.headers.cookie || '');
 

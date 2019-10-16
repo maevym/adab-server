@@ -43,4 +43,7 @@ module.exports = function(app) {
 
     app.route('/api/v1/session/discussions')
         .post(todoList.discussions);
+
+    app.route('/api/v1/session/discussions/new')
+        .post(todoList.newDiscussion);
 };
