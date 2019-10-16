@@ -335,6 +335,12 @@ small > a {
     margin: 0 16px;
 }
 
+@media (max-width: 700px) {
+    .hide-temp {
+        display: none;
+    }
+}
+
 @media (min-width: 901px) {
     .content-double-pane {
         display: flex;
