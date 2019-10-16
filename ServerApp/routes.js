@@ -40,4 +40,7 @@ module.exports = function(app) {
 
     app.route('/api/v1/session/details')
         .post(todoList.sessionDetails);
+
+    app.route('/api/v1/session/discussions')
+        .post(todoList.discussions);
 };
