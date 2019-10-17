@@ -130,7 +130,7 @@ exports.getProfilePicture = (req, res) => {
 };
 
 exports.profile = (req, res) => {
-    const query = "SELECT user_id, user_name, user_email, group_name, is_staff, can_talk FROM users INNER JOIN user_groups ON users.user_group = user_groups.group_id WHERE user_token = ?";
+    const query = "SELECT user_id, user_name, departments.name AS department, user_email, group_name, is_staff, can_talk FROM users INNER JOIN user_groups ON users.user_group = user_groups.group_id INNER JOIN departments ON departments.id = users.department_id WHERE user_token = ?";
     const auth = req.get("authorization");
     const userToken = (auth == null) ? cookie.parse(req.headers.cookie || '').session_id : auth.split(" ").pop();
 
