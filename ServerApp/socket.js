@@ -23,6 +23,14 @@ module.exports = (http) => {
 
         });
 
+        socket.on('start_talking', () => {
+            io.to(connectedRoomId).emit('start_talking');
+        });
+
+        socket.on('stop_talking', () => {
+            io.to(connectedRoomId).emit('stop_talking');
+        });
+
         socket.on('disconnect_room', () => {
             socket.leave(connectedRoomId, () => {
                 connectedRoomId = null;

@@ -1,5 +1,6 @@
 const transcript = document.getElementById("transcript");
 const startBicara = document.getElementById("start-talking");
+const blinkingCursor = document.getElementById("blinking-cursor");
 let nenglanghunjukbanghu = true;
 let recognition;
 
@@ -11,8 +12,17 @@ socket.on('message', (m) => {
     transcript.innerHTML += " " + m;
 });
 
+socket.on('start_talking', () => {
+    blinkingCursor.hidden = false;
+});
+
+socket.on('stop_talking', () => {
+    blinkingCursor.hidden = true;
+});
+
 function recognize() {
     if (nenglanghunjukbanghu) {
+        socket.emit('start_talking');
         startBicara.innerText = 'Stop Talking';
         recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
         recognition.lang = 'id-ID';
@@ -30,6 +40,7 @@ function recognize() {
         };
         recognition.start();
     } else {
+        socket.emit('stop_talking');
         startBicara.innerText = 'Start Talking';
         recognition.stop();
         recognition = null;
