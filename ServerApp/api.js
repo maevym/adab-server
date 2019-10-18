@@ -164,20 +164,21 @@ exports.profile = (req, res) => {
     const auth = req.get("authorization");
     const userToken = (auth == null) ? cookie.parse(req.headers.cookie || '').session_id : auth.split(" ").pop();
 
-    checkToken(userToken, (e, id) => {
-        if (!e) {
-            db.get(query, [userToken], (error, row) => {
-                if (!error) {
-                    response.ok(row, res);
-
-                } else {
-                    response.serverError(error, res);
-                }
-            });
+    checkTokenPromise(userToken).then((resolve) => {
+        db.get(query, [userToken], (error, row) => {
+            if (!error) {
+                response.ok(row, res);
+            } else {
+                response.serverError(error, res);
+            }
+        });
+    }).catch((reject => {
+        if (reject.code === 403) {
+            response.unauthorized(reject.message, res);
         } else {
-            response.unauthorized("Unauthorized", res);
+            response.serverError(reject.message, res);
         }
-    });
+    }));
 };
 
 exports.login = (req, res) => {
@@ -231,4 +232,17 @@ const checkToken = (token, callback) => {
            callback(403, null);
        }
     });
+};
+
+const checkTokenPromise = (token) => {
+    return new Promise(((resolve, reject) => {
+        const query = "SELECT user_id FROM USERS WHERE user_token = ?";
+        db.all(query, [token], (error, rows) => {
+            if (rows.length === 1) {
+                resolve({id: rows[0].user_id});
+            } else {
+                reject({code: 403, message: "Unauthorized"});
+            }
+        });
+    }));
 };
