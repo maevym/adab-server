@@ -194,7 +194,7 @@ const generateKey = () => {
 
 const checkToken = (token, callback) => {
     const query = "SELECT user_id FROM USERS WHERE user_token = ?";
-    db.all(query, [token], (rows) => {
+    db.all(query, [token], (error, rows) => {
        if (rows.length === 1) {
            callback.id = rows[0].user_id;
        } else {
