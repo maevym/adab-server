@@ -44,8 +44,12 @@ axios.get('/api/v1/user/profile', {})
         const { user_name: name, user_email: email } = response.data.values;
         const profileName = document.querySelector('#profile-name');
         const profileEmail = document.querySelector('#profile-email');
+        const profileNameShimmer = document.querySelector('#name-shimmer');
+        const profileEmailShimmer = document.querySelector('#email-shimmer');
         profileName.innerText = name;
         profileEmail.innerText = email;
+        profileNameShimmer.remove();
+        profileEmailShimmer.remove();
     })
     .catch(function(error) {
         console.log(error.message);
