@@ -37,6 +37,10 @@ function goToNavigation(navigation) {
     allNav.forEach(disableTheRest);
 }
 
+// remove shimmer in picture
+const profilePicture = document.querySelector("#profile-pic");
+profilePicture.onload = profilePicture.classList.remove("shine");
+
 // api calls
 
 axios.get('/api/v1/user/profile', {})
