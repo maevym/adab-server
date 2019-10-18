@@ -19,18 +19,24 @@ exports.newDiscussion = (req, res) => {
     const queryUserId = `SELECT user_id FROM users WHERE user_token = ?`;
     const queryInsert = `INSERT INTO discussions (session_id, author_id, reply_to, content, timestamp) SELECT ?, ?, ?, ?, datetime() WHERE EXISTS (SELECT * FROM user_sessions WHERE user_id = ? AND session_id = ?)`;
 
-    db.get(queryUserId, [userToken], (error, data) => {
-       if (!error) {
-           db.run(queryInsert, [sessionId, data.user_id, replyTo, content, data.user_id, sessionId], (error2) => {
-               if (!error2) {
-                   response.ok("New discussion entry posted.", res);
-               } else {
-                   response.serverError(error, res);
-               }
-           });
-       } else {
-           response.serverError(error, res);
-       }
+    checkToken(userToken, (e, id) => {
+        if (!e) {
+            db.get(queryUserId, [userToken], (error, data) => {
+                if (!error) {
+                    db.run(queryInsert, [sessionId, data.user_id, replyTo, content, data.user_id, sessionId], (error2) => {
+                        if (!error2) {
+                            response.ok("New discussion entry posted.", res);
+                        } else {
+                            response.serverError(error, res);
+                        }
+                    });
+                } else {
+                    response.serverError(error, res);
+                }
+            });
+        } else {
+            response.unauthorized("Unauthorized", res);
+        }
     });
 };
 
@@ -40,18 +46,24 @@ exports.discussions = (req, res) => {
     const auth = req.get("authorization");
     const userToken = (auth == null) ? cookie.parse(req.headers.cookie || '').session_id : auth.split(" ").pop();
 
-    if (userToken == null) {
-        response.unauthorized("Unauthorized", res);
-    } else {
-        const {session_id: sessionId} = req.body;
-        db.all(query, [sessionId, userToken], (error, data) => {
-            if (!error) {
-                response.ok(data, res);
+    checkToken(userToken, (e, id) => {
+        if (!e) {
+            if (userToken == null) {
+                response.unauthorized("Unauthorized", res);
             } else {
-                response.serverError(error, res);
+                const {session_id: sessionId} = req.body;
+                db.all(query, [sessionId, userToken], (error, data) => {
+                    if (!error) {
+                        response.ok(data, res);
+                    } else {
+                        response.serverError(error, res);
+                    }
+                });
             }
-        });
-    }
+        } else {
+            response.unauthorized("Unauthorized", res);
+        }
+    });
 
 };
 
@@ -61,22 +73,28 @@ exports.sessionDetails = (req, res) => {
     const auth = req.get("authorization");
     const userToken = (auth == null) ? cookie.parse(req.headers.cookie || '').session_id : auth.split(" ").pop();
 
-    if (userToken == null) {
-        response.unauthorized("Unauthorized", res);
-    } else {
-        const {session_id: sessionId} = req.body;
-        db.get(query, [sessionId, userToken], (error, row) => {
-            if (!error) {
-                if (row != null) {
-                    response.ok(row, res);
-                } else {
-                    response.notFound("No session found with that ID.", res);
-                }
+    checkToken(userToken, (e, id) => {
+        if (!e) {
+            if (userToken == null) {
+                response.unauthorized("Unauthorized", res);
             } else {
-                response.serverError(error, res);
+                const {session_id: sessionId} = req.body;
+                db.get(query, [sessionId, userToken], (error, row) => {
+                    if (!error) {
+                        if (row != null) {
+                            response.ok(row, res);
+                        } else {
+                            response.notFound("No session found with that ID.", res);
+                        }
+                    } else {
+                        response.serverError(error, res);
+                    }
+                });
             }
-        });
-    }
+        } else {
+            response.unauthorized("Unauthorized", res);
+        }
+    });
 
 };
 
@@ -88,21 +106,27 @@ exports.getSessions = (req, res) => {
     const auth = req.get("authorization");
     const userToken = (auth == null) ? cookie.parse(req.headers.cookie || '').session_id : auth.split(" ").pop();
 
-    if (userToken == null) {
-        response.unauthorized("Unauthorized", res);
-    } else {
-        db.all(query, [userToken], (error, row) => {
-            if (!error) {
-                if (row.length > 0) {
-                    response.ok(row, res);
-                } else {
-                    response.notFound("No sessions found on your account.", res);
-                }
+    checkToken(userToken, (e, id) => {
+        if (!e) {
+            if (userToken == null) {
+                response.unauthorized("Unauthorized", res);
             } else {
-                response.serverError(error, res);
+                db.all(query, [userToken], (error, row) => {
+                    if (!error) {
+                        if (row.length > 0) {
+                            response.ok(row, res);
+                        } else {
+                            response.notFound("No sessions found on your account.", res);
+                        }
+                    } else {
+                        response.serverError(error, res);
+                    }
+                });
             }
-        });
-    }
+        } else {
+            response.unauthorized("Unauthorized", res);
+        }
+    });
 };
 
 exports.getProfilePicture = (req, res) => {
@@ -110,22 +134,28 @@ exports.getProfilePicture = (req, res) => {
     const auth = req.get("authorization");
     const userToken = (auth == null) ? cookie.parse(req.headers.cookie || '').session_id : auth.split(" ").pop();
 
-    db.get(query, [userToken], (error, row) => {
-       if (!error) {
-           if (row != null) {
-               if (row.user_picture != null) {
-                   res.type("image/jpeg");
-                   res.send(Buffer.from(row.user_picture, "base64"));
-                   res.end();
-               } else {
-                   response.notFound("No profile picture set", res);
-               }
-           } else {
-               response.unauthorized("Unauthorized. Please login again.", res);
-           }
-       } else {
-           response.serverError(error, res);
-       }
+    checkToken(userToken, (e, id) => {
+        if (!e) {
+            db.get(query, [userToken], (error, row) => {
+                if (!error) {
+                    if (row != null) {
+                        if (row.user_picture != null) {
+                            res.type("image/jpeg");
+                            res.send(Buffer.from(row.user_picture, "base64"));
+                            res.end();
+                        } else {
+                            response.notFound("No profile picture set", res);
+                        }
+                    } else {
+                        response.unauthorized("Unauthorized. Please login again.", res);
+                    }
+                } else {
+                    response.serverError(error, res);
+                }
+            });
+        } else {
+            response.unauthorized("Unauthorized. Please login again.", res);
+        }
     });
 };
 
@@ -134,8 +164,8 @@ exports.profile = (req, res) => {
     const auth = req.get("authorization");
     const userToken = (auth == null) ? cookie.parse(req.headers.cookie || '').session_id : auth.split(" ").pop();
 
-    checkToken(userToken, (error) => {
-        if (!error) {
+    checkToken(userToken, (e, id) => {
+        if (!e) {
             db.get(query, [userToken], (error, row) => {
                 if (!error) {
                     response.ok(row, res);
