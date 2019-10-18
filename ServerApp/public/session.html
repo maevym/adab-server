@@ -3,11 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
     <title>Home | Adab</title>
-    <link rel="stylesheet" href="./assets/css/main.css">
-    <link rel="icon" href="./assets/img/adab.svg">
+    <link href="./assets/css/main.css" rel="stylesheet">
+    <link href="./assets/css/shimmer.css" rel="stylesheet">
+    <link href="./assets/img/adab.svg" rel="icon">
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 </head>
 
@@ -15,13 +16,13 @@
     <div class="reflex-layout">
         <div class="reflex-sidebar">
             <div class="sidebar-profile">
-                <a href="#" class="force-right padd-10 feather-button">
+                <a class="force-right padd-10 feather-button" href="#">
                     <i class="ic-settings" data-feather="settings"></i>
                 </a>
                 <img
+                        alt="profile-pic"
                         class="img-72 force-center"
-                        src="/api/v1/user/picture"
-                        alt="profile-pic">
+                        src="/api/v1/user/picture">
                 <div class="t-body2" id="profile-name" style="padding-top: 10px;"><shimmer-lines class="shine" id="name-shimmer"/></div>
                 <div class="t-body1" id="profile-email" style="padding-top: 4px"><shimmer-lines class="shine" id="email-shimmer"/></div>
             </div>
@@ -29,47 +30,47 @@
             <div class="sidebar-line"></div>
             <div class="sidebar-navigation">
                 <a
+                        class="padd-10 feather-button navigation-button disabled"
                         id="nav-dashboard"
-                        onclick="goToNavigation('nav-dashboard')"
-                        class="padd-10 feather-button navigation-button disabled">
+                        onclick="goToNavigation('nav-dashboard')">
                     <i data-feather="home"></i>
                     <span class="navigation-button-text">Dashboard</span>
                 </a>
                 <a
-                        id="nav-inbox"
+                        class="padd-10 feather-button navigation-button"
                         href="#"
-                        onclick="goToNavigation('nav-inbox')"
-                        class="padd-10 feather-button navigation-button">
+                        id="nav-inbox"
+                        onclick="goToNavigation('nav-inbox')">
                     <i data-feather="inbox"></i>
                     <span class="navigation-button-text">Inbox</span>
                 </a>
                 <a
-                        id="nav-class"
+                        class="padd-10 feather-button navigation-button"
                         href="#"
-                        onclick="goToNavigation('nav-class')"
-                        class="padd-10 feather-button navigation-button">
+                        id="nav-class"
+                        onclick="goToNavigation('nav-class')">
                     <i data-feather="book"></i>
                     <span class="navigation-button-text">Class</span>
                 </a>
                 <a
-                        id="nav-discussion"
+                        class="padd-10 feather-button navigation-button"
                         href="#"
-                        onclick="goToNavigation('nav-discussion')"
-                        class="padd-10 feather-button navigation-button">
+                        id="nav-discussion"
+                        onclick="goToNavigation('nav-discussion')">
                     <i data-feather="message-square"></i>
                     <span class="navigation-button-text">Discussion</span>
                 </a>
                 <a
-                        id="nav-schedule"
+                        class="padd-10 feather-button navigation-button"
                         href="#"
-                        onclick="goToNavigation('nav-schedule')"
-                        class="padd-10 feather-button navigation-button">
+                        id="nav-schedule"
+                        onclick="goToNavigation('nav-schedule')">
                     <i data-feather="calendar"></i>
                     <span class="navigation-button-text">Schedule</span>
                 </a>
             </div>
         </div>
-        <div id="view-dashboard" class="reflex-content">
+        <div class="reflex-content" id="view-dashboard">
             <div class="content-layout">
                 <div class="announcement-layout">
                     <div class="t-body2 announcement-header">Announcement</div>
@@ -84,13 +85,13 @@
                                     <i class="mr-8 feather-button" data-feather="book-open"></i>
                                     <div class="vertical-container">
                                         <div id="title"></div>
-                                        <div id="subtitle" class="t-caption"></div>
+                                        <div class="t-caption" id="subtitle"></div>
                                     </div>
                                 </div>
-                                <button id="start-talking" type="button" class="btn btn-primary" onclick="recognize()" hidden>Start Talking</button>
+                                <button class="btn btn-primary" hidden id="start-talking" onclick="recognize()" type="button">Start Talking</button>
                             </div>
                             <div class="card-content-container no-hover">
-                                <span id="transcript" class="t-body1"></span><span id="blinking-cursor" class="blinking-cursor" hidden>|</span>
+                                <span class="t-body1" id="transcript"></span><span class="blinking-cursor" hidden id="blinking-cursor">|</span>
                             </div>
                         </section>
                     </div>
@@ -101,7 +102,7 @@
                                     <i class="mr-8 feather-button" data-feather="calendar"></i>
                                     <div>Schedule</div>
                                 </div>
-                                <a href="#" class="card-header-btn t-body2">More</a>
+                                <a class="card-header-btn t-body2" href="#">More</a>
                             </div>
                             <div class="card-content-container">
                                 <div class="t-caption">Upcoming classes starting in 11 hour(s) 27 minutes</div>
@@ -125,7 +126,7 @@
                                     <i class="mr-8 feather-button" data-feather="message-square"></i>
                                     <div>Discussion</div>
                                 </div>
-                                <a href="#" class="card-header-btn t-body2">More</a>
+                                <a class="card-header-btn t-body2" href="#">More</a>
                             </div>
                             <div class="card-content-container">
                                 <div class="mt-4 t-body2">How do you create an android app with dev-cpp?</div>
@@ -136,7 +137,7 @@
                                         <div class="t-caption">Uploaded on September 16, 2019</div>
                                     </div>
                                 </div>
-                                <div class="mt-8 t-caption">Di kelas kita masih diajarkan untuk menggunakan DBMS, padahal sudah ada teknologi terbaru yaitu RDBMS. Apakah DBMS memang... <a style="text-decoration: none; color: #007BFF;" href="#">(more)</a></div>
+                                <div class="mt-8 t-caption">Di kelas kita masih diajarkan untuk menggunakan DBMS, padahal sudah ada teknologi terbaru yaitu RDBMS. Apakah DBMS memang... <a href="#" style="text-decoration: none; color: #007BFF;">(more)</a></div>
                                 <div class="footer-container">
                                     <div class="mt-8 mr-32 left-right-container">
                                         <i class="mr-8 feather-button-sm" data-feather="thumbs-up"></i>
@@ -157,7 +158,7 @@
                                         <div class="t-caption">Uploaded on September 16, 2019</div>
                                     </div>
                                 </div>
-                                <div class="mt-8 t-caption">Di kelas kita masih diajarkan untuk menggunakan DBMS, padahal sudah ada teknologi terbaru yaitu RDBMS. Apakah DBMS memang... <a style="text-decoration: none; color: #007BFF;" href="#">(more)</a></div>
+                                <div class="mt-8 t-caption">Di kelas kita masih diajarkan untuk menggunakan DBMS, padahal sudah ada teknologi terbaru yaitu RDBMS. Apakah DBMS memang... <a href="#" style="text-decoration: none; color: #007BFF;">(more)</a></div>
                                 <div class="footer-container">
                                     <div class="mt-8 mr-32 left-right-container">
                                         <i class="mr-8 feather-button-sm" data-feather="thumbs-up"></i>
@@ -174,10 +175,10 @@
                 </div>
             </div>
         </div>
-        <div id="view-inbox" class="reflex-content invisible"><div>Hello</div></div>
-        <div id="view-class" class="reflex-content invisible">Cipret</div>
-        <div id="view-discussion" class="reflex-content invisible">Hasdaisdiasod</div>
-        <div id="view-schedule" class="reflex-content invisible">aaa</div>
+        <div class="reflex-content invisible" id="view-inbox"><div>Hello</div></div>
+        <div class="reflex-content invisible" id="view-class">Cipret</div>
+        <div class="reflex-content invisible" id="view-discussion">Hasdaisdiasod</div>
+        <div class="reflex-content invisible" id="view-schedule">aaa</div>
     </div>
 
     <script src="./assets/js_modules/axios.js"></script>
