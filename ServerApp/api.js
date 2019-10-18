@@ -134,15 +134,20 @@ exports.profile = (req, res) => {
     const auth = req.get("authorization");
     const userToken = (auth == null) ? cookie.parse(req.headers.cookie || '').session_id : auth.split(" ").pop();
 
-    db.get(query, [userToken], (error, row) => {
-       if (!error) {
-           response.ok(row, res);
+    checkToken(userToken, (error) => {
+        if (!error) {
+            db.get(query, [userToken], (error, row) => {
+                if (!error) {
+                    response.ok(row, res);
 
-       } else {
-            response.serverError(error, res);
-       }
+                } else {
+                    response.serverError(error, res);
+                }
+            });
+        } else {
+            response.unauthorized("Unauthorized", res);
+        }
     });
-
 };
 
 exports.login = (req, res) => {
@@ -185,4 +190,15 @@ exports.index = (req, res) => {
 
 const generateKey = () => {
     return crypto.randomBytes(32).toString('base64');
+};
+
+const checkToken = (token, callback) => {
+    const query = "SELECT user_id FROM USERS WHERE user_token = ?";
+    db.all(query, [token], (rows) => {
+       if (rows.length === 1) {
+           callback.id = rows[0].user_id;
+       } else {
+           callback.error = 403;
+       }
+    });
 };
