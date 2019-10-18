@@ -196,9 +196,9 @@ const checkToken = (token, callback) => {
     const query = "SELECT user_id FROM USERS WHERE user_token = ?";
     db.all(query, [token], (error, rows) => {
        if (rows.length === 1) {
-           callback.id = rows[0].user_id;
+           callback(null, rows[0].user_id);
        } else {
-           callback.error = 403;
+           callback(403, null);
        }
     });
 };
