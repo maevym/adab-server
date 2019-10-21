@@ -194,11 +194,18 @@ exports.login = (req, res) => {
                 console.log(row[0].user_id);
                 db.run(query2, [session, row[0].user_id], (error2) => {
                     if (!error2) {
-                        res.setHeader('Set-Cookie', cookie.serialize('session_id', session, {
-                            httpOnly: true,
-                            maxAge: 60 * 60 * 24 * 0.5 // 1 week
-                        }));
-                        response.ok({"session_id": session}, res);
+                        // log into database
+                        const ipAddress = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+                        const userAgent = req.headers['user-agent'];
+                        db.run(`INSERT INTO user_login_log VALUES (?, datetime(), ?, ?)`, [row[0].user_id, ipAddress, userAgent], (error3) => {
+                            if (!error3) {
+                                res.setHeader('Set-Cookie', cookie.serialize('session_id', session, {
+                                    httpOnly: true,
+                                    maxAge: 60 * 60 * 24 * 0.5 // 1 week
+                                }));
+                                response.ok({"session_id": session}, res);
+                            }
+                        });
                     } else {
                         response.serverError(error, res);
                         // console.log('b');
