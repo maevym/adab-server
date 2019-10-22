@@ -73,7 +73,7 @@ axios.get('/api/v1/user/sessions', {})
                                 <div class="footer-container">
                                     <div class="mt-8 mr-32 left-right-container">
                                         <i class="mr-8 feather-button-sm" data-feather="clock"></i>
-                                        <div class="t-caption">${sessionStart}</div>
+                                        <div class="t-caption">${moment(sessionStart).format('dddd, MMMM Do YYYY, HH:mm')}</div>
                                     </div>
                                     <div class="mt-8 left-right-container">
                                         <i class="mr-8 feather-button-sm" data-feather="map-pin"></i>
