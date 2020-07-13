@@ -46,4 +46,32 @@ module.exports = function(app) {
 
     app.route('/api/v1/session/discussions/new')
         .post(todoList.newDiscussion);
+
+    //API Routes for Admin Web
+    app.route('/api/v1/admin/retrieveAllUsers')
+        .get(todoList.retrieveAllUsers);
+
+    app.route('/api/v1/admin/retrieveAllCourses')
+        .get(todoList.retrieveAllCourses);
+
+    app.route('/api/v1/admin/retrieveAllSessions')
+        .get(todoList.retrieveAllSessions);
+
+    app.route('/api/v1/admin/createNewUser')
+        .post(todoList.createNewUser);
+
+    app.route('/api/v1/admin/createNewCourse')
+        .post(todoList.createNewCourse);
+
+    app.route('/api/v1/admin/createNewSession')
+        .post(todoList.createNewSession);
+        
+    app.route('/api/v1/admin/updateExistingUser/:user_id')
+        .patch(todoList.updateExistingUser);  
+
+    app.route('/api/v1/admin/updateExistingCourse/:courseId')
+        .patch(todoList.updateExistingCourse);
+
+    app.route('/api/v1/admin/updateExistingSession/:sessionId')
+        .patch(todoList.updateExistingSession);    
 };
