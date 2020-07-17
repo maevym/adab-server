@@ -3,6 +3,7 @@
 module.exports = function(app) {
     const todoList = require('./api');
     const controller = require('./controller');
+    const checkAdminToken = require('./middleware/checkAdminToken');
 
     // HTML routes below
     app.get('/', (req, res) => {
@@ -46,4 +47,32 @@ module.exports = function(app) {
 
     app.route('/api/v1/session/discussions/new')
         .post(todoList.newDiscussion);
+
+    //API Routes for Admin Web
+    app.route('/api/v1/admin/retrieveAllUsers')
+        .get(checkAdminToken,todoList.retrieveAllUsers);
+
+    app.route('/api/v1/admin/retrieveAllCourses')
+        .get(checkAdminToken,todoList.retrieveAllCourses);
+
+    app.route('/api/v1/admin/retrieveAllSessions')
+        .get(checkAdminToken,todoList.retrieveAllSessions);
+
+    app.route('/api/v1/admin/createNewUser')
+        .post(checkAdminToken,todoList.createNewUser);
+
+    app.route('/api/v1/admin/createNewCourse')
+        .post(checkAdminToken,todoList.createNewCourse);
+
+    app.route('/api/v1/admin/createNewSession')
+        .post(checkAdminToken,todoList.createNewSession);
+        
+    app.route('/api/v1/admin/updateExistingUser/:user_id')
+        .patch(checkAdminToken,todoList.updateExistingUser);  
+
+    app.route('/api/v1/admin/updateExistingCourse/:courseId')
+        .patch(checkAdminToken,todoList.updateExistingCourse);
+
+    app.route('/api/v1/admin/updateExistingSession/:sessionId')
+        .patch(checkAdminToken,todoList.updateExistingSession);    
 };

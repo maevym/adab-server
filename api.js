@@ -226,6 +226,105 @@ exports.index = (req, res) => {
     response.ok("Hello from the Node JS RESTful side!", res)
 };
 
+exports.retrieveAllUsers = (req, res) => {
+    const query = "SELECT user_id, user_name, departments.name,user_groups.group_name, user_groups.is_staff, user_groups.can_talk, user_email, user_picture FROM users INNER JOIN departments ON users.department_id = departments.id INNER JOIN user_groups ON users.user_group = user_groups.group_id";
+    db.all(query, [], (error, row) => {
+        if (!error) {
+            response.ok(row, res);
+        } else {
+            response.serverError(error, res);
+        }
+    });
+}
+
+exports.retrieveAllCourses = (req, res) => {
+    const query = "SELECT * FROM courses";
+    db.all(query, [], (error, row) => {
+        if (!error) {
+            response.ok(row, res);
+        } else {
+            response.serverError(error, res);
+        }
+    });
+}
+
+exports.retrieveAllSessions = (req, res) => {
+    const query = "SELECT sessions.session_id, courses.course_id, course_name, session_th, session_mode, classes.class_name, topic_title, topic_description, session_campus, session_room, users.user_id AS lecturer_id, users.user_name AS lecturer_name, session_startdate, session_enddate FROM user_classes INNER JOIN sessions ON sessions.class_id = user_classes.class_id INNER JOIN classes ON sessions.class_id = classes.class_id INNER JOIN courses ON classes.course_id = courses.course_id INNER JOIN users ON classes.class_lecturer_id = users.user_id ORDER BY datetime(session_startdate)";
+    db.all(query, [], (error, row) => {
+        if (!error) {
+            response.ok(row, res);
+        } else {
+            response.serverError(error, res);
+        }
+    });
+}
+
+exports.createNewUser = (req,res) => {
+    const query = "INSERT INTO users (user_id, user_name, department_id, user_group, user_email, user_picture, user_password) VALUES (?,?,?,?,?,?,?)";
+    db.run(query, [req.body.user_id, req.body.user_name, req.body.department_id, req.body.user_group, req.body.user_email, req.body.user_picture, req.body.user_password], (error, row) => {
+        if (!error) {
+            response.ok(row, res);
+        } else {
+            response.serverError(error, res);
+        }
+    });
+}
+
+exports.createNewCourse = (req,res) => {
+    const query = "INSERT INTO courses VALUES (?,?,?,?)";
+    db.run(query, [req.body.course_id, req.body.course_name, req.body.course_description, req.body.course_lang], (error, row) => {
+        if (!error) {
+            response.ok(row, res);
+        } else {
+            response.serverError(error, res);
+        }
+    });
+}
+
+exports.createNewSession = (req,res) => {
+    const query = "INSERT INTO sessions (class_id, session_th, topic_title, topic_description, session_mode, session_startdate, session_enddate, session_campus, session_room) VALUES(?,?,?,?,?,?,?,?,?)";
+    db.run(query, [req.body.class_id, req.body.session_th, req.body.topic_title, req.body.topic_description, req.body.session_mode, req.body.session_stardate, req.body.session_enddate, req.body.session_campus, req.body.session_room], (error, row) => {
+        if (!error) {
+            response.ok(row, res);
+        } else {
+            response.serverError(error, res);
+        }
+    });
+}
+
+exports.updateExistingUser = (req,res) =>{
+    const query = "UPDATE users SET user_name = ?, department_id = ?, user_group = ?, user_email = ?, user_picture = ?, user_password = ? WHERE user_id = ?";
+    db.run(query, [req.body.user_name, req.body.department_id, req.body.user_group, req.body.user_email, req.body.user_picture, req.body.user_password,req.params.user_id], (error, row) => {
+        if (!error) {
+            response.ok(row, res);
+        } else {
+            response.serverError(error, res);
+        }
+    });
+}
+
+exports.updateExistingCourse = (req,res) =>{
+    const query = "UPDATE courses SET course_name = ?, course_description = ?, course_lang = ? WHERE course_id = ?";
+    db.run(query, [req.body.course_name, req.body.course_description, req.body.course_lang, req.params.courseId], (error, row) => {
+        if (!error) {
+            response.ok(row, res);
+        } else {
+            response.serverError(error, res);
+        }
+    });
+}
+
+exports.updateExistingSession = (req,res) =>{
+    const query = "UPDATE sessions SET class_id = ?, session_th = ?, topic_title = ?, topic_description = ?, session_mode = ?, session_startdate = ?, session_enddate = ?, session_campus = ?, session_room = ? WHERE session_id = ?";
+    db.run(query, [req.body.class_id, req.body.session_th, req.body.topic_title, req.body.topic_description, req.body.session_mode, req.body.session_stardate, req.body.session_enddate, req.body.session_campus, req.body.session_room, req.params.sessionId], (error, row) => {
+        if (!error) {
+            response.ok(row, res);
+        } else {
+            response.serverError(error, res);
+        }
+    });
+}
+
 const generateKey = () => {
     return crypto.randomBytes(32).toString('base64');
 };
