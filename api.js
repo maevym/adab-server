@@ -358,13 +358,9 @@ exports.register = (req, res) => {
     const {email: userEmail, password: userPassword, name: userName, user_type: userType} = req.body;
     const query = "INSERT INTO t_user (email, password, name, user_type) VALUES (?, ?, ?, ?)";
 
-    db.all (query, [userEmail, md5(userPassword), userName, userType], function(error, row) {
-        if (!error) {
-            if (row.affectedRows === 1) {
-                response.ok({"message": "Successfully add Data"}, res);
-            } else {
-                response.unauthorized("Failed to Insert Data", res);
-            }
+    db.run(query, [userEmail, md5(userPassword), userName, userType], (error2) => {
+        if (!error2) {
+            response.ok("Successfully add data", res);
         } else {
             response.serverError(error, res);
         }
@@ -396,6 +392,47 @@ exports.login = (req, res) => {
             response.serverError(error, res);
             // console.log('a');
         }
+    });
+};
+
+exports.getSessions = (req, res) => {
+
+    const query = "SELECT se.class_id, se.session_start, se.session_end, se.session_name FROM t_sessions se JOIN t_user_class tuc ON se.class_id = tuc.class_id WHERE tuc.user_id =>
+
+    const {user_secret: userSecret, date: requestDate} = req.body;
+
+    checkToken(userSecret, (e, id) => {
+        if (!e) {
+            if (userSecret == null) {
+                response.unauthorized("Unauthorized", res);
+            } else {
+                let date2 = requestDate + "%";
+                db.all(query, [userSecret, date2], (error, row) => {
+                    if (!error) {
+                        if (row.length > 0) {
+                            response.ok(row, res);
+                        } else {
+                            response.notFound("No sessions found on your account.", res);
+                        }
+                    } else {
+                        response.serverError(error, res);
+                    }
+                });
+            }
+        } else {
+            response.unauthorized("Unauthorized", res);
+        }
+    });
+};
+
+const checkToken = (token, callback) => {
+    const query = "SELECT user_id FROM t_user WHERE user_secret = ?";
+    db.all(query, [token], (error, rows) => {
+       if (rows.length === 1) {
+           callback(null, rows[0].user_id);
+       } else {
+           callback(403, null);
+       }
     });
 };
 
