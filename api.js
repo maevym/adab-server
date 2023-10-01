@@ -521,4 +521,3 @@ exports.login = (req, res) => {
 const generateKey = () => {
     return crypto.randomBytes(32).toString('base64');
 };
-
