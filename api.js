@@ -356,14 +356,19 @@ const cookie = require('cookie');
 //REFACTORED CODE
 //REFACTORED CODE
 exports.register = (req, res) => {
-    const {email: userEmail, password: userPassword, name: userName, user_type: userType} = req.body;
-    const query = "INSERT INTO t_user (email, password, name, user_type) VALUES (?, ?, ?, ?)";
+    const {email: userEmail, password: userPassword, name: userName, user_type: userType, user_unique: userUnique} = req.body;
+    const query = "INSERT INTO t_user (email, password, name, user_type, user_unique) VALUES (?, ?, ?, ?, ?)";
 
-    db.run(query, [userEmail, md5(userPassword), userName, userType], (error2) => {
+    db.run(query, [userEmail, md5(userPassword), userName, userType, userUnique], (error2) => {
         if (!error2) {
             response.ok("Successfully add data", res);
         } else {
-            response.serverError(error, res);
+            if(error2.errno === 19){
+                let message = "Data sudah pernah diinput sebelumnya";
+                response.unauthorized(message, res);
+            }else{
+                response.serverError(error2, res);
+            }
         }
     });
 };
@@ -450,6 +455,30 @@ exports.getAllSessions = (req, res) => {
     }
 };
 
+exports.getAllMember = (req, res) => {
+
+    const query = "SELECT user_id, name, user_unique FROM t_user WHERE user_id IN (SELECT user_id FROM t_user_class WHERE class_id = ?);";
+
+    const {class_id: classId} = req.body;
+
+    if (classId == null) {
+        response.unauthorized("Unauthorized", res);
+    } else {
+        db.all(query, [classId], (error, row) => {
+            if (!error) {
+                if (row.length > 0) {
+                    response.ok(row, res);
+                } else {
+                    response.notFound("No Member on this Class", res);
+                }
+            } else {
+                response.serverError(error, res);
+            }
+        });
+    }
+};
+
+
 const checkToken = (token, callback) => {
     const query = "SELECT user_id FROM t_user WHERE user_secret = ?";
     db.all(query, [token], (error, rows) => {
@@ -492,3 +521,4 @@ exports.login = (req, res) => {
 const generateKey = () => {
     return crypto.randomBytes(32).toString('base64');
 };
+

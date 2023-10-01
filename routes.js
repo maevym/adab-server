@@ -48,6 +48,9 @@ module.exports = function(app) {
     app.route('/api/v1/user/getAllSessions')
          .post(todoList.getAllSessions);
 
+    app.route('/api/v1/user/getAllMember')
+         .post(todoList.getAllMember);
+
     // app.route('/api/v1/session/details')
     //     .post(todoList.sessionDetails);
 
