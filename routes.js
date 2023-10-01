@@ -40,7 +40,13 @@ module.exports = function(app) {
     //     .get(todoList.getProfilePicture);
 
     app.route('/api/v1/user/sessions')
-        .get(todoList.getSessions);
+         .post(todoList.getSessions);
+
+    app.route('/api/v1/user/getAllClass')
+         .post(todoList.getAllClass);
+
+    app.route('/api/v1/user/getAllSessions')
+         .post(todoList.getAllSessions);
 
     // app.route('/api/v1/session/details')
     //     .post(todoList.sessionDetails);

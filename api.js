@@ -354,6 +354,7 @@ const cookie = require('cookie');
 // };
 
 //REFACTORED CODE
+//REFACTORED CODE
 exports.register = (req, res) => {
     const {email: userEmail, password: userPassword, name: userName, user_type: userType} = req.body;
     const query = "INSERT INTO t_user (email, password, name, user_type) VALUES (?, ?, ?, ?)";
@@ -364,6 +365,99 @@ exports.register = (req, res) => {
         } else {
             response.serverError(error, res);
         }
+    });
+};
+
+exports.getSessions = (req, res) => {
+
+    const query =  "SELECT se.class_id, se.session_location, se.session_start AS sessionstrt, se.session_end, se.session_name, mcl.class_name, mcl.class_code FROM t_sessions se JOIN m_class mcl ON se.class_id = mcl.class_id WHERE mcl.class_id IN (SELECT class_id FROM t_user tusr JOIN t_user_class tucls ON tusr.user_id = tucls.user_id WHERE user_secret = ?) AND sessionstrt LIKE ? ORDER BY datetime(sessionstrt)";
+
+    const {user_secret: userSecret, date: requestDate} = req.body;
+
+    checkToken(userSecret, (e, id) => {
+        if (!e) {
+            if (userSecret == null) {
+                response.unauthorized("Unauthorized", res);
+            } else {
+ 		let date2 = requestDate + "%";
+                db.all(query, [userSecret, date2], (error, row) => {
+                    if (!error) {
+                        if (row.length > 0) {
+                            response.ok(row, res);
+                        } else {
+                            response.notFound("No sessions found on your account.", res);
+                        }
+                    } else {
+                        response.serverError(error, res);
+                    }
+                });
+            }
+        } else {
+            response.unauthorized("Unauthorized", res);
+        }
+    });
+};
+
+exports.getAllClass = (req, res) => {
+
+    const query = "SELECT * FROM m_class WHERE class_id IN (SELECT class_id FROM t_user tusr JOIN t_user_class tucls ON tusr.user_id = tucls.user_id WHERE user_secret = ?)";
+
+    const {user_secret: userSecret} = req.body;
+
+    checkToken(userSecret, (e, id) => {
+        if (!e) {
+            if (userSecret == null) {
+                response.unauthorized("Unauthorized", res);
+            } else {
+                db.all(query, [userSecret], (error, row) => {
+                    if (!error) {
+                        if (row.length > 0) {
+                            response.ok(row, res);
+                        } else {
+                            response.notFound("No Class found on your account.", res);
+                        }
+                    } else {
+                        response.serverError(error, res);
+                    }
+                });
+            }
+        } else {
+            response.unauthorized("Unauthorized", res);
+        }
+    });
+};
+
+exports.getAllSessions = (req, res) => {
+
+    const query = "SELECT * FROM t_sessions WHERE class_id = ?";
+
+    const {class_id: classId} = req.body;
+
+    if (classId == null) {
+        response.unauthorized("Unauthorized", res);
+    } else {
+        db.all(query, [classId], (error, row) => {
+            if (!error) {
+                if (row.length > 0) {
+                    response.ok(row, res);
+                } else {
+                    response.notFound("No Sessions found on your account.", res);
+                }
+            } else {
+                response.serverError(error, res);
+            }
+        });
+    }
+};
+
+const checkToken = (token, callback) => {
+    const query = "SELECT user_id FROM t_user WHERE user_secret = ?";
+    db.all(query, [token], (error, rows) => {
+       if (rows.length === 1) {
+           callback(null, rows[0].user_id);
+       } else {
+           callback(403, null);
+       }
     });
 };
 
@@ -392,47 +486,6 @@ exports.login = (req, res) => {
             response.serverError(error, res);
             // console.log('a');
         }
-    });
-};
-
-exports.getSessions = (req, res) => {
-
-    const query = "SELECT se.class_id, se.session_start, se.session_end, se.session_name FROM t_sessions se JOIN t_user_class tuc ON se.class_id = tuc.class_id WHERE tuc.user_id =>
-
-    const {user_secret: userSecret, date: requestDate} = req.body;
-
-    checkToken(userSecret, (e, id) => {
-        if (!e) {
-            if (userSecret == null) {
-                response.unauthorized("Unauthorized", res);
-            } else {
-                let date2 = requestDate + "%";
-                db.all(query, [userSecret, date2], (error, row) => {
-                    if (!error) {
-                        if (row.length > 0) {
-                            response.ok(row, res);
-                        } else {
-                            response.notFound("No sessions found on your account.", res);
-                        }
-                    } else {
-                        response.serverError(error, res);
-                    }
-                });
-            }
-        } else {
-            response.unauthorized("Unauthorized", res);
-        }
-    });
-};
-
-const checkToken = (token, callback) => {
-    const query = "SELECT user_id FROM t_user WHERE user_secret = ?";
-    db.all(query, [token], (error, rows) => {
-       if (rows.length === 1) {
-           callback(null, rows[0].user_id);
-       } else {
-           callback(403, null);
-       }
     });
 };
 
