@@ -492,7 +492,7 @@ const checkToken = (token, callback) => {
 
 exports.login = (req, res) => {
     const {user_email: userEmail, user_password: userPassword} = req.body;
-    const query = "SELECT user_id FROM t_user WHERE email = ? AND password = ?";
+    const query = "SELECT * FROM t_user WHERE email = ? AND password = ?";
 
     db.all (query, [userEmail, md5(userPassword)], function(error, row) {
         if (!error) {
@@ -505,7 +505,7 @@ exports.login = (req, res) => {
                     if (error2) {
                         response.serverError(error, res);
                     }else{
-                        response.ok({"user_secret": userSecret}, res);
+                        response.ok({"user_secret": userSecret, "name": row[0].name}, res);
                     }
                 });
             } else {
